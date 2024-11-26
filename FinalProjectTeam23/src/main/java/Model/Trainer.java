@@ -1,27 +1,27 @@
 import java.util.UUID;
 
 public class Trainer extends User {
-    private UUID trainerID;
+    private UUID trainerId;
     private String trainerContact;
     private String services;
     private String workoutPlan;
     private String about;
 
-    public Trainer(UUID userID, String username, String passwordHash, String email, String profilePicture, String role, UUID trainerID, String trainerContact, String services, String workoutPlan, String about) {
-        super(userID, username, passwordHash, email, profilePicture, role);
-        this.trainerID = trainerID;
+    public Trainer(UUID userId, String username, String passwordHash, String email, String profilePicture, String role, UUID trainerId, String trainerContact, String services, String workoutPlan, String about) {
+        super(userId, username, passwordHash, email, profilePicture, role);
+        this.trainerId = UUID.randomUUID();
         this.trainerContact = trainerContact;
         this.services = services;
         this.workoutPlan = workoutPlan;
         this.about = about;
     }
 
-    public UUID getTrainerID() {
-        return trainerID;
+    public UUID getTrainerId() {
+        return trainerId;
     }
 
-    public void setTrainerID(UUID trainerID) {
-        this.trainerID = trainerID;
+    public void setTrainerId(UUID trainerId) {
+        this.trainerId = trainerId;
     }
 
     public String getTrainerContact() {

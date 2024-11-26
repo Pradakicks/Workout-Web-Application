@@ -1,15 +1,15 @@
 import java.util.UUID;
 
 public class User {
-    private UUID userID;
+    private UUID userId;
     private String username;
     private String passwordHash;
     private String email;
     private String profilePicture;
     private String role; // client or trainer
 
-    public User(UUID userID, String username, String passwordHash, String email, String profilePicture, String role) {
-        this.userID = userID;
+    public User(UUID userId, String username, String passwordHash, String email, String profilePicture, String role) {
+        this.userId = UUID.randomUUID();
         this.username = username;
         this.passwordHash = passwordHash;
         this.email = email;
@@ -17,12 +17,12 @@ public class User {
         this.role = role;
     }
 
-    public UUID getUserID() {
-        return userID;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setUserID(UUID userID) {
-        this.userID = userID;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

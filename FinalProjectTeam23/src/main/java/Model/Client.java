@@ -1,25 +1,25 @@
 import java.util.UUID;
 
 public class Client extends User {
-    private UUID clientID;
+    private UUID clientId;
     private String goals; 
     private String workoutPlan; 
     private Streak streak;
 
-    public Client(UUID userID, String username, String passwordHash, String email, String profilePicture, String role, UUID clientID, String goals, String workoutPlan, Streak streak) {
-        super(userID, username, passwordHash, email, profilePicture, role);
-        this.clientID = clientID;
+    public Client(UUID userId, String username, String passwordHash, String email, String profilePicture, String role, UUID clientId, String goals, String workoutPlan, Streak streak) {
+        super(userId, username, passwordHash, email, profilePicture, role);
+        this.clientId = clientId;
         this.goals = goals;
         this.workoutPlan = workoutPlan;
         this.streak = streak;
     }
 
-    public UUID getClientID() {
-        return clientID;
+    public UUID getClientId() {
+        return clientId;
     }
 
-    public void setClientID(UUID clientID) {
-        this.clientID = clientID;
+    public void setClientId(UUID clientId) {
+        this.clientId = clientId;
     }
 
     public String getGoals() {
@@ -37,7 +37,7 @@ public class Client extends User {
     public void setWorkoutPlan(String workoutPlan) {
         this.workoutPlan = workoutPlan;
     }
-    
+
     public Streak getStreak() {
         return streak;
     }
