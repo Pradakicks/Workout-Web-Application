@@ -1,34 +1,35 @@
 import java.sql.Timestamp;
+import java.util.UUID;
 
 public class Streak {
-    private String streakId;
-    private String clientId;
-    private int currentStreak;
+    private UUID streakID;
+    private UUID clientID;
+    private int currentStreak; 
     private int longestStreak;
     private Timestamp lastCheckin;
 
-    public Streak(String streakId, String clientId, int currentStreak, int longestStreak, Timestamp lastCheckin) {
-        this.streakId = streakId;
-        this.clientId = clientId;
+    public Streak(UUID streakID, UUID clientID, int currentStreak, int longestStreak, Timestamp lastCheckin) {
+        this.streakID = streakID;
+        this.clientID = clientID;
         this.currentStreak = currentStreak;
         this.longestStreak = longestStreak;
         this.lastCheckin = lastCheckin;
     }
 
-    public String getStreakId() {
-        return streakId;
+    public UUID getStreakID() {
+        return streakID;
     }
 
-    public void setStreakId(String streakId) {
-        this.streakId = streakId;
+    public void setStreakID(UUID streakID) {
+        this.streakID = streakID;
     }
 
-    public String getClientId() {
-        return clientId;
+    public UUID getClientID() {
+        return clientID;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setClientID(UUID clientID) {
+        this.clientID = clientID;
     }
 
     public int getCurrentStreak() {

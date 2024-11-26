@@ -5,13 +5,15 @@ public class User {
     private String username;
     private String passwordHash;
     private String email;
+    private String profilePicture;
     private String role; // client or trainer
 
-    public User(UUID userID, String username, String passwordHash, String email, String role) {
+    public User(UUID userID, String username, String passwordHash, String email, String profilePicture, String role) {
         this.userID = userID;
         this.username = username;
         this.passwordHash = passwordHash;
         this.email = email;
+        this.profilePicture = profilePicture;
         this.role = role;
     }
 
@@ -53,5 +55,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }
