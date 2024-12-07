@@ -11,7 +11,6 @@ import "./App.css";
 
 const App = () => {
   const logoHeight = 80;
-  return (<ReviewPage/>)
   return (
     <div
       style={{
