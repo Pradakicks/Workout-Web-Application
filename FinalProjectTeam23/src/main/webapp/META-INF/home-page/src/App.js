@@ -6,10 +6,7 @@ import ProfileCard from "./components/ProfileCard";
 import SearchBar from "./components/SearchBar";
 import CircleButton from "./components/CircleButton";
 import ProfileButton from "./components/ProfileButton";
-import ReviewPage from "./components/ReviewPage";
 import "./App.css";
-import Dashboard from "./Dashboard";
-import { BrowserRouter, Routes, Route } from "react-router";
 
 const App = () => {
   const logoHeight = 80;
