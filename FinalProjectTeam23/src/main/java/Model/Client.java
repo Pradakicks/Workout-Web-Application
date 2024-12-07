@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.UUID;
 
 public class Client extends User {
