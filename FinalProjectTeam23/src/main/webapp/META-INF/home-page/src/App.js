@@ -69,15 +69,6 @@ const App = () => {
             />
             <span>Settings</span>
           </button>
-
-          <button className="settings-button">
-            <img
-              src={settings}
-              alt="Settings Icon"
-              style={{ width: 30, marginRight: 10 }}
-            />
-            <span>Settings</span>
-          </button>
         </div>
       </div>
 
