@@ -1,0 +1,224 @@
+.app-container {
+  background-color: rgb(245, 245, 245);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-x: hidden; 
+}
+
+.app-name {
+  position: absolute; 
+  height: 80px;
+  top: 20px; 
+  left: 30px; 
+  font-size: 36px;
+  font-weight: bold; 
+  color: #2C7E45; 
+  font-family: Arial, sans-serif; 
+}
+
+.form-container {
+  width: 600px;
+  margin: 100px 10px 50px 250px;
+  padding-left: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column; 
+}
+
+.form-field {
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.rounded-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-icon {
+  position: absolute;
+  right: 15px;
+  top: 39px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px; 
+}
+
+.save-btn {
+  width: 70px;
+  padding: 5px;
+  background-color: #98D1A9;
+  border: 2px solid #2C7E45; 
+  font-weight: bold;
+  color: #2C7E45;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 5px; 
+  margin-left: 100px;
+  text-align: center; 
+}
+
+.save-btn:hover {
+  background-color: #98D1A9;
+  transform: translateY(-2px);
+}
+
+.confirmation-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.edit-pfp-container {
+  text-align: center;
+  margin-top: 120px;
+  margin-right: 400px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column; 
+  align-items: center;      
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.upload-button {
+  padding: 5px;
+  background-color: #98D1A9;
+  border: 2px solid #2C7E45; 
+  font-weight: bold;
+  color: #2C7E45;
+  border-radius: 15px;
+  cursor: pointer;
+  display: inline-block; 
+  text-align: center;   
+  width: 180px;            
+  margin-top: 10px;       
+}
+
+.upload-button:hover {
+  background-color: #98D1A9;
+  transform: translateY(-2px);
+}
+
+.container {
+  width: 1000px;
+  height: 250px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  border: 2px solid #f1c40f;
+  background-color: #fff8db;
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 20px;
+}
+
+.goals-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.goal-item {
+  background-color: #f1c40f; 
+  padding: 10px 20px;
+  border-radius: 25px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.remove-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.add-goal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  padding: 10px;
+  width: 30%;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: #f1c40f;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.logout-button {
+  width: 70px;
+  padding: 5px;
+  background-color: #98D1A9;
+  border: 2px solid #2C7E45; 
+  font-weight: bold;
+  color: #2C7E45;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 15px;
+  margin-top: 40px;
+  margin-left: 700px; 
+}
+
+.logout-button:hover {
+  background-color: #98D1A9;
+  transform: translateY(-2px);
+}
+

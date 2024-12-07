@@ -1,0 +1,15 @@
+Client.class
+Server/RemoveGoalServlet.class
+Server/DBConnector.class
+Server/UpdateUserProfileServlet.class
+Server/ProfilePictureUploadServlet.class
+Server/CORSFilter.class
+Review.class
+Server/AddGoalServlet.class
+Server/GetGoalsServlet.class
+Trainer.class
+Streak.class
+User.class
+Server/GetProfilePictureServlet.class
+Server/Server.class
+Server/GetUserProfileServlet.class
