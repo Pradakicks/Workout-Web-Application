@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ReviewPage from "./components/ReviewPage";
-import Dashboard from "./Dashboard";
+import Dashboard from "./components/Dashboard";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
