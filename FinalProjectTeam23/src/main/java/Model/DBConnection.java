@@ -17,7 +17,7 @@ public class DBConnection{
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/Server?user=root&password=Rachel99@");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/WorkoutApplication?user=root&password=Rachel99@");
         } catch (ClassNotFoundException e) {
             System.out.println("MySQL Driver not found.");
             e.printStackTrace();
@@ -81,5 +81,13 @@ public class DBConnection{
     return userId;
     }
 
-    
+    //getTrainer
+    //getClient
+    //getStreaks
+    //getWorkoutplan
+
+    public String getTrainer(int userId){
+
+        return "hi";
+    }
 }
