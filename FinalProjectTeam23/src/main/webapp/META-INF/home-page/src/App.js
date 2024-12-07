@@ -7,10 +7,11 @@ import SearchBar from "./components/SearchBar";
 import CircleButton from "./components/CircleButton";
 import ProfileButton from "./components/ProfileButton";
 import "./App.css";
+import Dashboard from "./Dashboard";
 
 const App = () => {
   const logoHeight = 80;
-
+  return (< Dashboard/>)
   return (
     <div
       style={{
