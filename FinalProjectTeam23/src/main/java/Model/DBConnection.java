@@ -39,7 +39,7 @@ public class DBConnection{
 
 
     public boolean registerUser(User user) {
-        String query = "INSERT INTO users (username, name, password, email, profile_image, role) VALUES (?, ?)";
+        String query = "INSERT INTO users (username, name, password, email, profile_image, role) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPasswordHash());
@@ -89,5 +89,31 @@ public class DBConnection{
     public String getTrainer(int userId){
 
         return "hi";
+    }
+
+    //Review Implementation - For CLIENT ONLY
+    //Must create a review object before calling this
+    public boolean addReview(Review review) {
+        String sql = "INSERT INTO Review (client_ID, trainer_ID, Rating, Comment) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setInt(1, review.getClientId()); 
+            statement.setObject(2, review.getTrainerId()); 
+            statement.setInt(3, review.getRating()); 
+            statement.setString(4, review.getComment());
+
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int userId = generatedKeys.getInt(1);
+                        review.setReviewId(userId);
+                    }
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("Could not save the review to the database: " + e.getMessage());
+        }
+        return false;
     }
 }
