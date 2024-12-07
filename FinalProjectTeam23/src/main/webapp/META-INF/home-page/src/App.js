@@ -6,6 +6,7 @@ import ProfileCard from "./components/ProfileCard";
 import SearchBar from "./components/SearchBar";
 import CircleButton from "./components/CircleButton";
 import ProfileButton from "./components/ProfileButton";
+import ReviewPage from "./components/ReviewPage";
 import "./App.css";
 import Dashboard from "./Dashboard";
 

@@ -1,0 +1,115 @@
+/* Container Styling */
+.review-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e7cc71; /* Gold border */
+    border-radius: 12px; /* Rounded corners */
+    background-color: #fffef6; /* Off-white background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 16px;
+    max-width: 800px;
+    margin: 24px auto;
+  }
+  
+  .review-page-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  /* Form Styling */
+  .review-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 8px;
+  }
+  
+  .input-field {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-field:focus {
+    border-color: #e7cc71;
+  }
+  
+  .submit-button {
+    align-self: flex-start;
+    background-color: #e7cc71; /* Gold color */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #d4b861; /* Slightly darker gold on hover */
+    transform: translateY(-2px); /* Subtle hover effect */
+  }
+  
+  /* Review List Styling */
+  .review-list {
+    width: 100%;
+  }
+  
+  .review-list-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .no-reviews {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+  }
+  
+  .review-item {
+    border: 1px solid #e7cc71;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-item p {
+    margin: 8px 0;
+    color: #555;
+    font-size: 1rem;
+  }
+  
+  .review-item strong {
+    color: #333;
+  }
+  
+  .star {
+    cursor: pointer;
+    transition: color 200ms;
+  }
