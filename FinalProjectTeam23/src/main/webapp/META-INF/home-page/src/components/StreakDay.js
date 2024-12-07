@@ -12,8 +12,8 @@ const StreakDay = ({day = "S"}) => {
 		backgroundColor: "#ECD1D1",
 		border: "none",
 		borderRadius: "10px",
-		height: "65px",
-		width: "40px"
+		height: "80px",
+		width: "60px"
 		}}></button>
 	</div>
   )

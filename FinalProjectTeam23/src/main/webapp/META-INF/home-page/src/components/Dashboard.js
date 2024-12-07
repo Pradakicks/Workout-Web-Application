@@ -36,11 +36,11 @@ const Dashboard = () => {
       {/* Dashboard container */}
       <div style={{display: "flex", marginTop: "3em", marginBottom: "5em"}}> 
       {/* Left column */}
-        <div style={{display: "flex", flexDirection: "column"}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
           <h3>MY INFO</h3>
           <div style={{display: "flex"}}>
             <StreakCard />
-            {/* User's health stats */}
+            {/* User's health stats
             <div
             className="grid-container"
             style={{
@@ -53,7 +53,7 @@ const Dashboard = () => {
                 <SmallDataCard dataTitle="Calories" dataValue="4901 kcal" icon={plate}/>
                 <SmallDataCard dataTitle="Water intake" dataValue="3 L" icon={water}/>
                 <SmallDataCard dataTitle="Weight" dataValue="153 lbs" icon={scale}/>
-            </div>
+            </div> */}
           </div>
           <div style={{ marginTop: "3em", alignItems: "flex-start" }}>
             <h3>TODAY'S WORKOUT PLAN</h3>
