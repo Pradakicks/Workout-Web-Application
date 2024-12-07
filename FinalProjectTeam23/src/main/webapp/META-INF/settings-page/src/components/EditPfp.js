@@ -1,18 +1,73 @@
-import React, { useState } from 'react';
-import profileIcon from "../assets/example-trainer.png"; 
+import React, { useState, useEffect } from 'react';
+import profileIcon from "../assets/example-trainer.png";
+import ProfileButton from './ProfileButton'; 
 
 const EditPfp = () => {
-  const [image, setImage] = useState(profileIcon);
-  const [username] = useState('@JohnDoe123'); // set this dynamically later
+  const [userData, setUserData] = useState({
+    name: '',
+    profilePicture: profileIcon, 
+  });
+  const [loading, setLoading] = useState(true); 
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  const fetchUserProfile = () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('User not logged in.');
+      return;
+    }
+
+    const userProfileUrl = `http://localhost:8080/settings/GetUserProfile?userId=${userId}`;
+    
+    fetch(userProfileUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          const profilePictureUrl = `http://localhost:8080/settings/GetProfilePicture?userId=${userId}`;
+          
+          setUserData({
+            name: data.username,
+            profilePicture: profilePictureUrl || profileIcon, 
+          });
+          setLoading(false); 
+        }
+      })
+      .catch((err) => {
+        alert('Failed to load user profile: ' + err.message);
+      });
+  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append("profilePicture", file);
+      const userId = localStorage.getItem('userId');
+      formData.append("userId", userId); 
+
+      fetch("http://localhost:8080/settings/UploadProfilePicture", {
+        method: "POST",
+        body: formData, 
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setUserData((prevData) => ({
+              ...prevData,
+              profilePicture: URL.createObjectURL(file), 
+            }));
+          } else {
+            alert("Failed to update profile picture.");
+          }
+        })
+        .catch((err) => {
+          alert("Error updating profile picture: " + err.message);
+        });
     }
   };
 
@@ -20,16 +75,24 @@ const EditPfp = () => {
     <div className="edit-pfp-container">
       {/* Profile Picture */}
       <div>
-        <img
-          src={image || 'https://via.placeholder.com/150'}
-          alt="Profile"
-          className="profile-image"
-        />
+        {loading ? (
+          <div className="profile-image-placeholder" style={{width: 100, height: 100, backgroundColor: 'white' }}></div>
+        ) : (
+          <img
+            src={userData.profilePicture}
+            alt="Profile"
+            className="profile-image"
+          />
+        )}
       </div>
 
       {/* Username */}
       <div className="username">
-        {username}
+        {loading ? (
+          <div className="username-placeholder" style={{ width: 100, height: 20, backgroundColor: 'white' }}></div>
+        ) : (
+          `@${userData.name}`
+        )}
       </div>
 
       {/* Upload Button */}
@@ -44,9 +107,13 @@ const EditPfp = () => {
           Update Profile Picture
         </label>
       </div>
+      <ProfileButton profilePicture={userData.profilePicture} /> 
     </div>
   );
 };
 
 export default EditPfp;
 
+
+
+ 

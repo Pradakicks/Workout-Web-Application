@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import profileIcon from "../assets/example-trainer.png"; 
 
-const ProfileButton = () => {
+const ProfileButton = ({ profilePicture }) => {
+  const [loading, setLoading] = useState(true); 
+
+  const fetchUserProfilePicture = () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('User not logged in.');
+      return;
+    }
+
+    const url = `http://localhost:8080/settings/GetProfilePicture?userId=${userId}`;
+    
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.blob();
+        } else {
+          throw new Error("Failed to fetch profile picture");
+        }
+      })
+      .then((imageBlob) => {
+        const imageUrl = URL.createObjectURL(imageBlob) || profileIcon;
+        setLoading(false);
+      })
+      .catch((err) => {
+        alert('Failed to load profile picture: ' + err.message);
+      });
+  };
+
+  useEffect(() => {
+    fetchUserProfilePicture();
+  }, []);
+
   return (
     <button
       style={{
@@ -16,18 +48,42 @@ const ProfileButton = () => {
         position: "absolute",
         top: "30px", 
         right: "30px", 
-      }}>
-      <img
-        src={profileIcon}
-        alt="Profile"
+      }}
+    >
+      <div
         style={{
           width: "100%", 
           height: "100%", 
-          objectFit: "cover", 
+          display: "flex", 
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      />
-    </button>
+      >
+        {loading ? (
+          <div
+            className="profile-image-placeholder"
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundColor: '#ccc', 
+            }}
+          ></div> 
+        ) : (
+          <img
+            src={profilePicture} 
+            alt="Profile"
+            style={{
+              width: "100%", 
+              height: "100%", 
+              objectFit: "cover", 
+            }}
+          />
+        )}
+      </div>
+    </button> 
   );
 };
 
 export default ProfileButton;
+
+
