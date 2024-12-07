@@ -11,15 +11,15 @@ const StreakCard = () => {
       <div style={{
 		display: "flex",
 		flexDirection: "column",
-		justifyContent: "flex-end",
+		justifyContent: "flex-start",
 	  }}>
-		<div style={{display: "flex", width: "100%"}}>
+		<div style={{display: "flex", width: "100%", marginLeft: "1px", marginBottom: "1em"}}>
 			<div style={{flexDirection: "column"}}>
 				<h4 style={{color: "#6c6c6c", fontWeight: "lighter"}}>Current streak</h4>
 				<h2 style={{color: "#C41616"}}>🔥 58</h2>
 	  		</div>
 			{/* Plus button */}
-			<div style={{justifyContent: "flex-end", marginLeft: "12em"}}>
+			<div style={{justifyContent: "flex-end", marginLeft: "25em"}}>
 				<button
 				style={{
 					width: "30px", // Adjust the size
