@@ -13,16 +13,15 @@ const ReviewPage = () => {
 
   return (
     <div className="review-page">
-      <h2 className="review-page-title">User Reviews</h2>
+      <h2 className="review-page-title">Add Review</h2>
       <ReviewForm addReview={addReview} />
-      <ReviewList reviews={reviews} />
+      {/* <ReviewList reviews={reviews} /> */}
     </div>
   );
 };
 
 const ReviewForm = ({ addReview }) => {
   const [review, setReview] = useState({
-    userName: "",
     rating: 0,
     comment: "",
     reviewedUser: "",
@@ -49,13 +48,12 @@ const ReviewForm = ({ addReview }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      review.userName &&
       review.rating > 0 &&
       review.comment &&
       review.reviewedUser
     ) {
       addReview(review);
-      setReview({ userName: "", rating: 0, comment: "", reviewedUser: "" });
+      setReview({ rating: 0, comment: "", reviewedUser: "" });
     }
   };
 
@@ -64,25 +62,13 @@ const ReviewForm = ({ addReview }) => {
   return (
     <form onSubmit={handleSubmit} className="review-form">
       <div className="form-group">
-        <label>Reviewed User:</label>
+        <label>Trainer:</label>
         <input
           type="text"
           name="reviewedUser"
           value={review.reviewedUser}
           onChange={handleChange}
-          placeholder="Enter the user's name"
-          required
-          className="input-field"
-        />
-      </div>
-      <div className="form-group">
-        <label>Your Name:</label>
-        <input
-          type="text"
-          name="userName"
-          value={review.userName}
-          onChange={handleChange}
-          placeholder="Enter your name"
+          placeholder="Enter the trainer's name for review"
           required
           className="input-field"
         />
@@ -109,32 +95,6 @@ const ReviewForm = ({ addReview }) => {
   );
 };
 
-const ReviewList = ({ reviews }) => {
-  return (
-    <div className="review-list">
-      <h3 className="review-list-title">Reviews:</h3>
-      {reviews.length === 0 ? (
-        <p className="no-reviews">No reviews yet.</p>
-      ) : (
-        reviews.map((review, index) => (
-          <div key={index} className="review-item">
-            <p>
-              <strong>Reviewed User:</strong> {review.reviewedUser}
-            </p>
-            <p>
-              <strong>Reviewer:</strong> {review.userName}
-            </p>
-            <p>
-              <strong>Rating:</strong> {review.rating} / 5
-            </p>
-            <p>
-              <strong>Comment:</strong> {review.comment}
-            </p>
-          </div>
-        ))
-      )}
-    </div>
-  );
-};
+
 
 export default ReviewPage;

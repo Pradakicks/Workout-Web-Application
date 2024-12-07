@@ -6,11 +6,12 @@ import ProfileCard from "./components/ProfileCard";
 import SearchBar from "./components/SearchBar";
 import CircleButton from "./components/CircleButton";
 import ProfileButton from "./components/ProfileButton";
+import ReviewPage from "./components/ReviewPage";
 import "./App.css";
 
 const App = () => {
   const logoHeight = 80;
-
+  return (<ReviewPage/>)
   return (
     <div
       style={{
@@ -57,6 +58,15 @@ const App = () => {
               style={{ width: 30, marginRight: 10 }}
             />
             <span>Profile</span>
+          </button>
+
+          <button className="settings-button">
+            <img
+              src={settings}
+              alt="Settings Icon"
+              style={{ width: 30, marginRight: 10 }}
+            />
+            <span>Settings</span>
           </button>
 
           <button className="settings-button">
