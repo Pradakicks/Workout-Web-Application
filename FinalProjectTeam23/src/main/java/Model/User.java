@@ -1,17 +1,15 @@
 package Model;
 
-import java.util.UUID;
-
 public class User {
-    private UUID userId;
+    private int userId;
     private String username;
     private String passwordHash;
     private String email;
     private String profilePicture;
-    private String role; // client or trainer
+    private String role;
 
-    public User(UUID userId, String username, String passwordHash, String email, String profilePicture, String role) {
-        this.userId = UUID.randomUUID();
+    public User(int userId, String username, String passwordHash, String email, String profilePicture, String role) {
+        this.userId = userId;
         this.username = username;
         this.passwordHash = passwordHash;
         this.email = email;
@@ -19,11 +17,11 @@ public class User {
         this.role = role;
     }
 
-    public UUID getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

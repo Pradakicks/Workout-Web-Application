@@ -1,13 +1,12 @@
-package Server;
+package Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.User;
 
 public class DBConnection{
     private Connection conn;
@@ -43,13 +42,13 @@ public class DBConnection{
         String query = "INSERT INTO users (username, password) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
+            stmt.setString(2, user.getPasswordHash());
             int rowsInserted = stmt.executeUpdate();
                 if (rowsInserted > 0) {
                     try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                         if (generatedKeys.next()) {
                             int userId = generatedKeys.getInt(1);
-                            user.setId(userId);
+                            user.setUserId(userId);
                         }
                     }
                 return true;
@@ -64,21 +63,23 @@ public class DBConnection{
         return false;
     }
     
-    public User authenticateUser(String username, String password) {
+    public int authenticateUser(String username, String password) {
         String query = "SELECT user_id, password FROM users WHERE username = ?";
+        int userId = -1;
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String storedPassword = rs.getString("password");
-                int userId = rs.getInt("user_id");
                 if (storedPassword.equals(password)) {
-                    return new User(userId, username, null);
+                    userId = rs.getInt("user_id");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    return null;
+    return userId;
     }
+
+    
 }
