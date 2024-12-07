@@ -3,14 +3,16 @@ package Model;
 public class User {
     private int userId;
     private String username;
+    private String name;
     private String passwordHash;
     private String email;
     private String profilePicture;
     private String role;
 
-    public User(int userId, String username, String passwordHash, String email, String profilePicture, String role) {
+    public User(int userId, String username, String name, String passwordHash, String email, String profilePicture, String role) {
         this.userId = userId;
         this.username = username;
+        this.name = name;
         this.passwordHash = passwordHash;
         this.email = email;
         this.profilePicture = profilePicture;
@@ -24,6 +26,15 @@ public class User {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public String getUsername() {
         return username;

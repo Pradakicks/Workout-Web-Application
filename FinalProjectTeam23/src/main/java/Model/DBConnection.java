@@ -39,7 +39,7 @@ public class DBConnection{
 
 
     public boolean registerUser(User user) {
-        String query = "INSERT INTO users (username, password) VALUES (?, ?)";
+        String query = "INSERT INTO users (username, name, password, email, profile_image, role) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPasswordHash());
