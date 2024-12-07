@@ -9,10 +9,10 @@ import ProfileButton from "./components/ProfileButton";
 import ReviewPage from "./components/ReviewPage";
 import "./App.css";
 import Dashboard from "./Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router";
 
 const App = () => {
   const logoHeight = 80;
-  return (< Dashboard/>)
   return (
     <div
       style={{
@@ -23,13 +23,15 @@ const App = () => {
         alignItems: "center",
         width: "100%", // Full width container
         overflowX: "hidden", // Prevent horizontal scrolling
-      }}>
+      }}
+    >
       {/* Logo Positioned at the Top-Left Corner */}
       <div
         style={{
           position: "relative", // Parent container for scrolling
           width: "100%",
-        }}>
+        }}
+      >
         <img
           src={logo}
           alt="Logo"
@@ -51,7 +53,8 @@ const App = () => {
             display: "flex",
             flexDirection: "column",
             gap: "10px",
-          }}>
+          }}
+        >
           <button className="profile-button">
             <img
               src={edit}
@@ -82,13 +85,15 @@ const App = () => {
           justifyContent: "center", // Center items
           paddingTop: "20px",
           gap: "20px",
-        }}>
+        }}
+      >
         {/* Sort By Button */}
         <button
           className="sort-by-button"
           style={{
             marginBottom: "10px", // Space below the button for the search bar
-          }}>
+          }}
+        >
           <span style={{ fontSize: "1rem" }}>Sort By</span>
         </button>
 
@@ -97,7 +102,8 @@ const App = () => {
           style={{
             width: "80%",
             maxWidth: "350px", // Optional max width
-          }}>
+          }}
+        >
           <SearchBar />
         </div>
 
@@ -115,7 +121,8 @@ const App = () => {
           marginTop: "150px",
           gap: "20px", // Optional: Adds spacing between rows and columns
           width: "90%", // Responsive grid width
-        }}>
+        }}
+      >
         <ProfileCard />
         <ProfileCard />
         <ProfileCard />
