@@ -1,4 +1,4 @@
-package Model;
+package Server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import User.User;
+import model.User;
 
 public class DBConnection{
     private Connection conn;
