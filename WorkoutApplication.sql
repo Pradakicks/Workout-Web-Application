@@ -58,5 +58,5 @@ CREATE TABLE Goals (
     goal_ID INT AUTO_INCREMENT PRIMARY KEY,
     user_ID INT NOT NULL,
     goal VARCHAR(255) NOT NULL,
-    FOREIGN KEY (user_ID) REFERENCES Users(user_ID),
+    FOREIGN KEY (user_ID) REFERENCES Users(user_ID)
 );

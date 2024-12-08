@@ -13,9 +13,7 @@ import "./App.css";
 
 const App = () => {
   const logoHeight = 80;
-<<<<<<< HEAD
   const navigate = useNavigate();
-=======
 
   const [trainers, setTrainers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +33,6 @@ const App = () => {
         setLoading(false); 
       });
   }, []);
->>>>>>> c2536feb6fed2363f07a31e0f543c5fa43f6e7d6
 
   return (
     <div
@@ -45,17 +42,10 @@ const App = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-<<<<<<< HEAD
         width: "100%",
         overflowX: "hidden",
       }}
     >
-=======
-        width: "100%", // Full width container
-        overflowX: "hidden", // Prevent horizontal scrolling
-      }}>
-      {/* Logo Positioned at the Top-Left Corner */}
->>>>>>> c2536feb6fed2363f07a31e0f543c5fa43f6e7d6
       <div
         style={{
           position: "relative",
@@ -81,17 +71,12 @@ const App = () => {
             display: "flex",
             flexDirection: "column",
             gap: "10px",
-<<<<<<< HEAD
           }}
         >
           <button
             className="profile-button"
             onClick={() => navigate("/dashboard")}
           >
-=======
-          }}>
-          <button className="profile-button">
->>>>>>> c2536feb6fed2363f07a31e0f543c5fa43f6e7d6
             <img
               src={edit}
               alt="Edit Icon"
@@ -123,7 +108,6 @@ const App = () => {
           justifyContent: "center",
           paddingTop: "20px",
           gap: "20px",
-<<<<<<< HEAD
         }}
       >
         <button
@@ -132,29 +116,15 @@ const App = () => {
             marginBottom: "10px",
           }}
         >
-=======
-        }}>
-        {/* Sort By Button */}
-        <button
-          className="sort-by-button"
-          style={{
-            marginBottom: "10px", // Space below the button for the search bar
-          }}>
->>>>>>> c2536feb6fed2363f07a31e0f543c5fa43f6e7d6
           <span style={{ fontSize: "1rem" }}>Sort By</span>
         </button>
 
         <div
           style={{
             width: "80%",
-<<<<<<< HEAD
             maxWidth: "350px",
           }}
         >
-=======
-            maxWidth: "350px", // Optional max width
-          }}>
->>>>>>> c2536feb6fed2363f07a31e0f543c5fa43f6e7d6
           <SearchBar />
         </div>
 
@@ -169,16 +139,10 @@ const App = () => {
           backgroundColor: "rgb(245, 245, 245)",
           gridTemplateColumns: "repeat(2, 1fr)",
           marginTop: "150px",
-<<<<<<< HEAD
           gap: "20px",
           width: "90%",
         }}
       >
-=======
-          gap: "20px", // Optional: Adds spacing between rows and columns
-          width: "90%", // Responsive grid width
-        }}>
->>>>>>> c2536feb6fed2363f07a31e0f543c5fa43f6e7d6
         <ProfileCard />
         <ProfileCard />
         <ProfileCard />
