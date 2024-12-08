@@ -13,6 +13,8 @@ const App = () => {
 
   const [trainers, setTrainers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredTrainers, setFilteredTrainers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   let baseURL = window.location.origin + "/FinalProjectTeam23/";
   var url = new URL("Weather", baseURL);
@@ -22,6 +24,7 @@ const App = () => {
       .then(response => response.json()) 
       .then(data => {
         setTrainers(data); 
+        setFilteredTrainers(data);
         setLoading(false);
       })
       .catch(error => {
@@ -29,6 +32,22 @@ const App = () => {
         setLoading(false); 
       });
   }, []);
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    const query = e.target.value.toLowerCase();
+  
+    // Filter the trainers based on name, title, or services
+    const filtered = trainers.filter((trainer) => {
+      return (
+        trainer.name.toLowerCase().includes(query) ||
+        trainer.trainerTitle.toLowerCase().includes(query) ||
+        trainer.services.toLowerCase().includes(query)
+      );
+    });
+  
+    setFilteredTrainers(filtered);
+  };
 
   return (
     <div
@@ -115,7 +134,7 @@ const App = () => {
             width: "80%",
             maxWidth: "350px", // Optional max width
           }}>
-          <SearchBar />
+          <SearchBar onSearch={handleSearch}/>
         </div>
 
         <CircleButton />
@@ -136,7 +155,7 @@ const App = () => {
         {loading ? (
           <p>Loading trainers...</p>
         ) : (
-          trainers.map(trainer => (
+          filteredTrainers.map(trainer => (
             <ProfileCard key={trainer.trainerId} trainer={trainer} />
           ))
         )}
