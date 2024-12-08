@@ -1,31 +1,40 @@
 package Model;
 
-import java.util.UUID;
-
 public class User {
-    private UUID userId;
+    private int userId;
     private String username;
+    private String name;
     private String passwordHash;
     private String email;
     private String profilePicture;
-    private String role; // client or trainer
+    private String role;
 
-    public User(UUID userId, String username, String passwordHash, String email, String profilePicture, String role) {
-        this.userId = UUID.randomUUID();
+    public User(int userId, String username, String name, String passwordHash, String email, String profilePicture, String role) {
+        this.userId = userId;
         this.username = username;
+        this.name = name;
         this.passwordHash = passwordHash;
         this.email = email;
         this.profilePicture = profilePicture;
         this.role = role;
     }
 
-    public UUID getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public String getUsername() {
         return username;

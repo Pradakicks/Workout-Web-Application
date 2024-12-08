@@ -1,14 +1,12 @@
 package Model;
 
-import java.util.UUID;
-
 public class Client extends User {
-    private UUID clientId;
+    private int clientId;
     private String goals; 
     private String workoutPlan; 
     private Streak streak;
 
-    public Client(UUID userId, String username, String passwordHash, String email, String profilePicture, String role, UUID clientId, String goals, String workoutPlan, Streak streak) {
+    public Client(int userId, String username, String passwordHash, String email, String profilePicture, String role, int clientId, String goals, String workoutPlan, Streak streak) {
         super(userId, username, passwordHash, email, profilePicture, role);
         this.clientId = clientId;
         this.goals = goals;
@@ -16,11 +14,11 @@ public class Client extends User {
         this.streak = streak;
     }
 
-    public UUID getClientId() {
+    public int getClientId() {
         return clientId;
     }
 
-    public void setClientId(UUID clientId) {
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
@@ -48,4 +46,3 @@ public class Client extends User {
         this.streak = streak;
     }
 }
-

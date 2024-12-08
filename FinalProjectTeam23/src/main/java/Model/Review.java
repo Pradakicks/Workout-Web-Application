@@ -3,40 +3,43 @@ package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.UUID;
 
 public class Review {
-    private UUID reviewId;
-    private UUID clientId;
-    private UUID trainerId;
+    private int reviewId;
+    private int clientId;
+    private int trainerId;
     private int rating;
     private String comment;
 
-    public Review(UUID clientId, UUID trainerId, int rating, String comment) {
-        this.reviewId = UUID.randomUUID();
+    public Review(int reviewId, int clientId, int trainerId, int rating, String comment) {
+        this.reviewId = reviewId;
         this.clientId = clientId;
         this.trainerId = trainerId;
         this.rating = rating;
         this.comment = comment;
     }
 
-    public UUID getReviewId() {
+    public int getReviewId() {
         return reviewId;
     }
 
-    public UUID getClientId() {
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public int getClientId() {
         return clientId;
     }
 
-    public void setClientId(UUID clientId) {
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
-    public UUID getTrainerId() {
+    public int getTrainerId() {
         return trainerId;
     }
 
-    public void setTrainerId(UUID trainerId) {
+    public void setTrainerId(int trainerId) {
         this.trainerId = trainerId;
     }
 
@@ -67,7 +70,7 @@ public class Review {
     }
 
     public boolean validate() {
-        if (clientId == null || trainerId == null) {
+        if (clientId <= 0 || trainerId <= 0) {
             System.err.println("Client ID and Trainer ID cannot be null.");
             return false;
         }
