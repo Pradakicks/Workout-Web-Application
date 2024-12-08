@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const UserForm = () => {
+const UpdateUserForm = () => {
   const [userData, setUserData] = useState({
     name: '',
+	username: '',
     email: '',
     password: '',
     profilePicture: '', 
@@ -17,14 +18,14 @@ const UserForm = () => {
   }, []);
 
   const fetchUserProfile = () => {
-    //localStorage.setItem('userId', '1');
-    const userId = localStorage.getItem('userId');
+    localStorage.setItem('userId', '1');
+    let userId = localStorage.getItem('userId');
     if (!userId) {
       alert('User not logged in.');
       return;
     }
 
-    const url = `http://localhost:8080/settings/GetUserProfile?userId=${userId}`;
+    const url = `http://localhost:8080/Workout-Web-Application/GetUserProfile?userId=${userId}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -32,7 +33,8 @@ const UserForm = () => {
           alert(data.error);
         } else {
           setUserData({
-            name: data.username,
+            name: data.name,
+			username: data.username,
             email: data.email,
             password: data.password, 
             profilePicture: data.profilePicture || '', 
@@ -41,7 +43,8 @@ const UserForm = () => {
         }
       })
       .catch((err) => {
-        //alert('Failed to load user profile: ' + err.message);
+	  console.error('Request failed:', err);
+	  setErrorMessage('Failed to get user profile: ' + err.message);
       });
   };
 
@@ -55,16 +58,17 @@ const UserForm = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+	e.preventDefault();
     const userId = localStorage.getItem('userId');
     if (!userId) {
       setErrorMessage('User not logged in.');
       return;
     }
 
-    const { name, email, password, newPassword } = userData;
+    const { name, username, email, password, newPassword } = userData;
 
-    if (!email || !name) {
+    if (!email || !name || !username || !password) {
       setErrorMessage('Username and email are required!');
       return;
     }
@@ -73,7 +77,8 @@ const UserForm = () => {
 	  return; 
 	}
 	
-    const url = `http://localhost:8080/settings/UpdateUserProfile?userId=${userId}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(newPassword || password)}&username=${encodeURIComponent(name)}`;
+    // If the newPassword field is filled, update it, otherwise, use the old password
+    const url = `http://localhost:8080/Workout-Web-Application/fitnessapp/UpdateUserProfile?userId=${userId}&password=${encodeURIComponent(newPassword || password)}&name=${encodeURIComponent(name)}`;
 
     fetch(url)
       .then((response) => {
@@ -87,9 +92,7 @@ const UserForm = () => {
           setErrorMessage(data.error);
         } else {
           setErrorMessage('');
-          //alert('User profile updated successfully!');
           fetchUserProfile();
-		      window.location.reload(); 
         }
       })
       .catch((err) => {
@@ -105,7 +108,7 @@ const UserForm = () => {
   return (
     <div className="form-container">
       <div className="form-field">
-        <label>Username</label>
+        <label>Name</label>
         <input
           type="text"
           name="name"
@@ -122,6 +125,7 @@ const UserForm = () => {
           className="rounded-input"
           value={userData.email}
           onChange={handleChange}
+		  readOnly
         />
       </div>
       <div className="form-field password-container">
@@ -155,4 +159,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm;
+export default UpdateUserForm;

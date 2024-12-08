@@ -8,7 +8,7 @@ CREATE TABLE users (
     name VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    profile_image TEXT,
+    profile_image LONGBLOB,
     role ENUM('client', 'trainer') NOT NULL
 );
 
@@ -52,4 +52,11 @@ CREATE TABLE Review (
     Comment TEXT,
     FOREIGN KEY (client_ID) REFERENCES Clients(client_ID),
     FOREIGN KEY (trainer_ID) REFERENCES Trainers(trainer_ID)
+);
+
+CREATE TABLE Goals (
+    goal_ID INT AUTO_INCREMENT PRIMARY KEY,
+    user_ID INT NOT NULL,
+    goal VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_ID) REFERENCES Users(user_ID)
 );

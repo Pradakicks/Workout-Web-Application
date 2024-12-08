@@ -2,8 +2,9 @@ import React from "react";
 
 const LogoutButton = () => {
   const handleLogout = () => {
-    alert("You have been logged out.");
-    // Redirect to home page and clear session as needed
+    //alert("You have been logged out.");
+    localStorage.setItem('userId', '0');
+    // Redirect to home page 
   };
 
   return (

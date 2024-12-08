@@ -20,7 +20,7 @@ const EditPfp = () => {
       return;
     }
 
-    const userProfileUrl = `http://localhost:8080/settings/GetUserProfile?userId=${userId}`;
+    const userProfileUrl = `http://localhost:8080/GetUserProfile?userId=${userId}`;
     
     fetch(userProfileUrl)
       .then((response) => response.json())
@@ -28,7 +28,7 @@ const EditPfp = () => {
         if (data.error) {
           alert(data.error);
         } else {
-          const profilePictureUrl = `http://localhost:8080/settings/GetProfilePicture?userId=${userId}`;
+          const profilePictureUrl = `http://localhost:8080/GetProfilePicture?userId=${userId}`;
           
           setUserData({
             name: data.username,
@@ -38,7 +38,7 @@ const EditPfp = () => {
         }
       })
       .catch((err) => {
-        alert('Failed to load user profile: ' + err.message);
+        //alert('Failed to load user profile: ' + err.message);
       });
   };
 
@@ -50,7 +50,7 @@ const EditPfp = () => {
       const userId = localStorage.getItem('userId');
       formData.append("userId", userId); 
 
-      fetch("http://localhost:8080/settings/UploadProfilePicture", {
+      fetch("http://localhost:8080/UploadProfilePicture", {
         method: "POST",
         body: formData, 
       })
@@ -62,11 +62,11 @@ const EditPfp = () => {
               profilePicture: URL.createObjectURL(file), 
             }));
           } else {
-            alert("Failed to update profile picture.");
+            //alert("Failed to update profile picture.");
           }
         })
         .catch((err) => {
-          alert("Error updating profile picture: " + err.message);
+          //alert("Error updating profile picture: " + err.message);
         });
     }
   };

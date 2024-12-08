@@ -22,10 +22,10 @@ public class AddGoalServlet extends HttpServlet {
         PrintWriter pw = response.getWriter();
         response.setContentType("application/json");
 
-        String clientIdParam = request.getParameter("clientId");
+        String userIdParam = request.getParameter("userId");
         String goalParam = request.getParameter("goal");
 
-        if (clientIdParam == null || clientIdParam.isEmpty()) {
+        if (userIdParam == null || userIdParam.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.write("{\"error\": \"clientId is required\"}");
             return;
@@ -35,9 +35,9 @@ public class AddGoalServlet extends HttpServlet {
             return;
         }
 
-        int clientId;
+        int userId;
         try {
-            clientId = Integer.parseInt(clientIdParam);
+            userId = Integer.parseInt(userIdParam);
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.write("{\"error\": \"Invalid clientId format\"}");
@@ -56,18 +56,18 @@ public class AddGoalServlet extends HttpServlet {
                 return;
             }
 
-            String selectQuery = "SELECT goal FROM Goals WHERE goal = ? AND client_id = ?";
+            String selectQuery = "SELECT goal FROM Goals WHERE goal = ? AND user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(selectQuery);
             pstmt.setString(1, goalParam);
-            pstmt.setInt(2, clientId);
+            pstmt.setInt(2, userId);
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 pw.write("{\"message\": \"Goal already exists for the user\"}");
             } else {
-                String insertQuery = "INSERT INTO Goals (client_id, goal) VALUES (?, ?)";
+                String insertQuery = "INSERT INTO Goals (user_id, goal) VALUES (?, ?)";
                 pstmt = connection.prepareStatement(insertQuery);
-                pstmt.setInt(1, clientId);
+                pstmt.setInt(1, userId);
                 pstmt.setString(2, goalParam);
                 int rowsAffected = pstmt.executeUpdate();
 

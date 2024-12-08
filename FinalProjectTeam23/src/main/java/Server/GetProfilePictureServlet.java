@@ -47,13 +47,13 @@ public class GetProfilePictureServlet extends HttpServlet {
                 return;
             }
 
-            String query = "SELECT profile_picture FROM Users WHERE user_id = ?";
+            String query = "SELECT profile_image FROM Users WHERE user_id = ?";
             pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, userId);
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                byte[] profilePictureData = rs.getBytes("profile_picture");
+                byte[] profilePictureData = rs.getBytes("profile_image");
                 if (profilePictureData != null) {
                     response.setContentType("image/png");
                     response.setContentLength(profilePictureData.length);

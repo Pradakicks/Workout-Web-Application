@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import profileIcon from "../assets/example-trainer.png"; 
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const ProfileButton = ({ profilePicture }) => {
-  const [loading, setLoading] = useState(true); 
+const SettingsProfileButton = ({ profilePicture }) => {
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const fetchUserProfilePicture = () => {
     const userId = localStorage.getItem('userId');
@@ -11,7 +12,7 @@ const ProfileButton = ({ profilePicture }) => {
       return;
     }
 
-    const url = `http://localhost:8080/settings/GetProfilePicture?userId=${userId}`;
+    const url = `http://localhost:8080/Workout-Web-Application/GetProfilePicture?userId=${userId}`;
     
     fetch(url)
       .then((response) => {
@@ -22,11 +23,11 @@ const ProfileButton = ({ profilePicture }) => {
         }
       })
       .then((imageBlob) => {
-        const imageUrl = URL.createObjectURL(imageBlob) || profileIcon;
+        // Handle image blob (if needed)
         setLoading(false);
       })
       .catch((err) => {
-        //alert('Failed to load profile picture: ' + err.message);
+        // Handle error (optional)
       });
   };
 
@@ -36,25 +37,26 @@ const ProfileButton = ({ profilePicture }) => {
 
   return (
     <button
+      onClick={() => navigate("/dashboard")} // Navigate to dashboard on click
       style={{
-        width: "40px", 
-        height: "40px", 
+        width: "40px",
+        height: "40px",
         borderRadius: "50%",
-        padding: 0, 
-        overflow: "hidden", 
-        border: "1px solid #ddd", 
-        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", 
+        padding: 0,
+        overflow: "hidden",
+        border: "1px solid #ddd",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
         cursor: "pointer",
         position: "absolute",
-        top: "30px", 
-        right: "30px", 
+        top: "30px",
+        right: "30px",
       }}
     >
       <div
         style={{
-          width: "100%", 
-          height: "100%", 
-          display: "flex", 
+          width: "100%",
+          height: "100%",
+          display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -65,25 +67,23 @@ const ProfileButton = ({ profilePicture }) => {
             style={{
               width: "100%",
               height: "100%",
-              backgroundColor: '#ccc', 
+              backgroundColor: '#ccc',
             }}
-          ></div> 
+          ></div>
         ) : (
           <img
-            src={profilePicture} 
+            src={profilePicture}
             alt="Profile"
             style={{
-              width: "100%", 
-              height: "100%", 
-              objectFit: "cover", 
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
             }}
           />
         )}
       </div>
-    </button> 
+    </button>
   );
 };
 
-export default ProfileButton;
-
-
+export default SettingsProfileButton;

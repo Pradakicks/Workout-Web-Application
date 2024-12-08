@@ -1,15 +1,17 @@
 package Server;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.Instant;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/update-streak")
 public class StreakServlet extends HttpServlet {
@@ -33,7 +35,7 @@ public class StreakServlet extends HttpServlet {
 
                 // Send success response with updated streak value
                 resp.setStatus(HttpServletResponse.SC_OK);
-                resp.getWriter().write("Streak updated successfully! Current streak: " + updatedStreak);
+                resp.getWriter().write(updatedStreak);
             } 
         } catch (NumberFormatException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -41,7 +43,7 @@ public class StreakServlet extends HttpServlet {
             e.printStackTrace();
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write("Error thrown herefjrgfnmjrglnr: " + e.getMessage());
+            resp.getWriter().write("Error thrown: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -54,7 +56,7 @@ public class StreakServlet extends HttpServlet {
         try {
             System.out.println("Fetching streak for client ID: " + clientId);
             String query = "SELECT current_streak, longest_streak, last_checkin FROM Streaks WHERE client_ID = " + clientId;
-            try (Connection conn = Database.getConnection()) {
+            try (Connection conn = DBConnection.getConnection()) {
                 if (conn == null) {
                     throw new Exception("Failed to establish database connection.");
                 }
@@ -62,9 +64,13 @@ public class StreakServlet extends HttpServlet {
                 ResultSet rs = stmt.executeQuery(query);
 
                 if (rs.next()) {
+                	System.out.println("144 ");
                     currentStreak = rs.getInt("current_streak");
+                    System.out.println("55 ");
                     longestStreak = rs.getInt("longest_streak");
+                    System.out.println("66 ");
                     lastCheckin = rs.getTimestamp("last_checkin");
+                    System.out.println("177");
                 } else {
                     // No streak found, so create a new streak for the client
                     System.out.println("No streak found for client ID: " + clientId + ". Creating new streak.");
@@ -151,7 +157,7 @@ public class StreakServlet extends HttpServlet {
             if (conn == null) {
                 throw new Exception("Failed to establish database connection.");
             }
-            String query = "SELECT current_streak FROM Clients WHERE client_ID = " + clientId;
+            String query = "SELECT current_streak FROM Streaks WHERE client_ID = " + clientId;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 

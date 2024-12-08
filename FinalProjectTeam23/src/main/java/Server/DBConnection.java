@@ -7,6 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+<<<<<<< HEAD
+public class DBConnection {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/WorkoutApplication?user=root&password=lynette14$"
+        );
+=======
 import User.User;
 
 public class DBConnection{
@@ -80,5 +88,6 @@ public class DBConnection{
             e.printStackTrace();
         }
     return null;
+>>>>>>> c2536feb6fed2363f07a31e0f543c5fa43f6e7d6
     }
 }

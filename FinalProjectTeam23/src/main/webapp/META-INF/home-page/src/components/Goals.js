@@ -9,13 +9,14 @@ const Goals = () => {
   }, []);
 
   const fetchGoals = () => {
+	localStorage.setItem('userId','1');
     const userId = localStorage.getItem('userId');
     if (!userId) {
       alert('User not logged in.');
       return;
     }
 
-    const url = `http://localhost:8080/settings/fetchGoals?userId=${userId}`;
+    const url = `http://localhost:8080/Workout-Web-Application/fetchGoals?userId=${userId}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -42,12 +43,13 @@ const Goals = () => {
       return;
     }
 
+    // Check if the user already has 5 goals
     if (goals.length >= 5) {
       alert('You can only have 5 goals.');
       return;
     }
 
-    const url = `http://localhost:8080/settings/AddGoal?userId=${userId}&goal=${goalInput.trim()}`;
+    const url = `http://localhost:8080/Workout-Web-Application/AddGoal?userId=${userId}&goal=${goalInput.trim()}`;
 
     fetch(url, { method: 'GET' })
       .then((response) => response.json())
@@ -72,7 +74,7 @@ const Goals = () => {
       return;
     }
 
-    const url = `http://localhost:8080/settings/RemoveGoal?userId=${userId}&goal=${goal}`;
+    const url = `http://localhost:8080/Workout-Web-Application/RemoveGoal?userId=${userId}&goal=${goal}`;
 
     fetch(url, { method: 'GET' })
       .then((response) => response.json())
@@ -89,32 +91,36 @@ const Goals = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">Goals</div>
-      <div className="goals-container">
-        {goals.map((goal, index) => (
-          <div key={index} className="goal-item">
-            <span>{goal}</span>
-            <button onClick={() => handleRemoveGoal(goal)} className="remove-button">
-              x
+      <>
+        {/* Header outside container */}
+        <div className="header">Goals</div>
+
+        <div className="container">
+          <div className="goals-container">
+            {goals.map((goal, index) => (
+              <div key={index} className="goal-item">
+                <span>{goal}</span>
+                <button onClick={() => handleRemoveGoal(goal)} className="remove-button">
+                  x
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="add-goal-container">
+            <input
+              type="text"
+              value={goalInput}
+              onChange={(e) => setGoalInput(e.target.value)}
+              placeholder="Enter new goal"
+              className="input"
+            />
+            <button onClick={handleAddGoal} className="add-button">
+              +
             </button>
           </div>
-        ))}
-      </div>
-      <div className="add-goal-container">
-        <input
-          type="text"
-          value={goalInput}
-          onChange={(e) => setGoalInput(e.target.value)}
-          placeholder="Enter new goal"
-          className="input"
-        />
-        <button onClick={handleAddGoal} className="add-button">
-          +
-        </button>
-      </div>
-    </div>
-  );
-};
+        </div>
+      </>
+    );
+  };
 
 export default Goals;
