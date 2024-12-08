@@ -15,8 +15,8 @@ import Model.*; // Using all files (SQL)
 public class DBConnection {
     private Connection conn;
     private static final String DB_URL = "jdbc:mysql://localhost:3306/WorkoutDB";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "bs27wm9A#";
+    private static final String DB_USERNAME = "your_username";
+    private static final String DB_PASSWORD = "your_password";
 
     // Get database connection
     public static Connection getConnection() throws SQLException {
