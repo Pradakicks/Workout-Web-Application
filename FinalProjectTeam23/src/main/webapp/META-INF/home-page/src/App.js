@@ -133,13 +133,19 @@ const App = () => {
           gap: "20px", // Optional: Adds spacing between rows and columns
           width: "90%", // Responsive grid width
         }}>
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-      </div>
+        {loading ? (
+          <p>Loading trainers...</p>
+        ) : (
+          trainers.map(trainer => (
+            <ProfileCard key={trainer.trainerId} trainer={trainer} />
+          ))
+        )}
+      </div> 
     </div>
   );
 };
+/*For each trainer in the trainers array, it renders a ProfileCard component.
+Each ProfileCard gets a key prop, which is necessary for React to keep track of 
+elements in the list efficiently. The trainer.trainerId is used as the unique key.*/
 
 export default App;
