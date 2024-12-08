@@ -1,12 +1,12 @@
 import React from "react";
 import profileIcon from "../assets/example-trainer.png"; // Replace with the path to your image
 
-const ProfileButton = () => {
+const ProfileButton = ({ width = "40px", height = "40px" }) => {
   return (
     <button
       style={{
-        width: "40px", // Adjust the size
-        height: "40px", // Make it a circle
+        width: width, // Adjust the size
+        height: height, // Make it a circle
         borderRadius: "50%", // Creates a circular shape
         padding: 0, // Remove padding to prevent image overflow
         overflow: "hidden", // Ensures the image stays within the circle
