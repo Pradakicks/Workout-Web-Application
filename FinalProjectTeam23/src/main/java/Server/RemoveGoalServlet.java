@@ -24,9 +24,6 @@ public class RemoveGoalServlet extends HttpServlet {
         String clientIdParam = request.getParameter("clientId");
         String goalParam = request.getParameter("goal");
 
-        // Log incoming request
-        //System.out.println("Received request to remove goal for userId: " + clientIdParam);
-        //System.out.println("Received goal: " + goalParam);
 
         // Check if Id is provided
         if (clientIdParam == null || clientIdParam.isEmpty()) {

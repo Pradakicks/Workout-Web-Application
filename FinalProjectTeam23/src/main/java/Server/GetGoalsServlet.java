@@ -26,17 +26,17 @@ public class GetGoalsServlet extends HttpServlet {
         PrintWriter pw = response.getWriter();
         response.setContentType("application/json");
 
-        String clientIdParam = request.getParameter("clientId");
+        String userIdParam = request.getParameter("userId");
 
-        if (clientIdParam == null || clientIdParam.isEmpty()) {
+        if (userIdParam == null || userIdParam.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.write("{\"error\": \"clientId is required\"}");
             return;
         }
 
-        int clientId;
+        int userId;
         try {
-            clientId = Integer.parseInt(clientIdParam);
+            userId = Integer.parseInt(userIdParam);
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.write("{\"error\": \"Invalid clientId format\"}");
@@ -56,9 +56,9 @@ public class GetGoalsServlet extends HttpServlet {
                 return;
             }
 
-            String query = "SELECT goal FROM Goals WHERE client_id = ?";
+            String query = "SELECT goal FROM Goals WHERE user_id = ?";
             stmt = connection.prepareStatement(query);
-            stmt.setInt(1, clientId);
+            stmt.setInt(1, userId);
 
             rs = stmt.executeQuery();
             List<String> goals = new ArrayList<>();
