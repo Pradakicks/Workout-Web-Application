@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class ProfilePictureUploadServlet extends HttpServlet {
 
         if (userIdParam == null || userIdParam.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("{\"error\": \"userId is required\"}");
+            response.getWriter().write("{\"error\": \"UserId is required\"}");
             return;
         }
 
@@ -34,7 +35,7 @@ public class ProfilePictureUploadServlet extends HttpServlet {
             userId = Integer.parseInt(userIdParam);
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("{\"error\": \"Invalid userId format\"}");
+            response.getWriter().write("{\"error\": \"Invalid UserId format\"}");
             return;
         }
 
@@ -45,6 +46,7 @@ public class ProfilePictureUploadServlet extends HttpServlet {
             return;
         }
 
+        // Handle file upload
         try (InputStream inputStream = filePart.getInputStream();
              Connection connection = DBConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement("UPDATE Users SET profile_picture = ? WHERE user_id = ?")) {
@@ -64,5 +66,29 @@ public class ProfilePictureUploadServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{\"error\": \"Database error occurred\"}");
         }
+    }
+
+    private String saveProfilePictureToDatabase(int userId, byte[] image) throws SQLException {
+        String imageUrl = null;
+
+        if (image == null || image.length == 0) {
+            throw new SQLException("Image data is empty or null.");
+        }
+
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "UPDATE Users SET profile_picture = ? WHERE user_id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setBytes(1, image);
+                stmt.setInt(2, userId);
+
+                int rowsUpdated = stmt.executeUpdate();
+                if (rowsUpdated > 0) {
+                    imageUrl = "http://localhost/assets/profile_pictures/" + userId + ".png";
+                } else {
+                    throw new SQLException("User not found or profile picture update failed.");
+                }
+            }
+        }
+        return imageUrl;
     }
 }
