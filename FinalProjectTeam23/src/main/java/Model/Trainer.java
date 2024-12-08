@@ -1,26 +1,26 @@
-import java.util.UUID;
+package Model;
+
+import Model.User;
 
 public class Trainer extends User {
-    private UUID trainerId;
+    private int trainerId;
     private String trainerContact;
     private String services;
-    private String workoutPlan;
-    private String about;
+    private String trainerTitle;
 
-    public Trainer(UUID userId, String username, String passwordHash, String email, String profilePicture, String role, UUID trainerId, String trainerContact, String services, String workoutPlan, String about) {
-        super(userId, username, passwordHash, email, profilePicture, role);
-        this.trainerId = UUID.randomUUID();
+    public Trainer(int trainerId, int userId, String username, String name, String passwordHash, String email, String profilePicture, String role, String trainerContact, String services, String trainerTitle) {
+        super(userId, username, name, passwordHash, email, profilePicture, role);
+        this.trainerId = trainerId;
         this.trainerContact = trainerContact;
         this.services = services;
-        this.workoutPlan = workoutPlan;
-        this.about = about;
+        this.trainerTitle = trainerTitle;
     }
 
-    public UUID getTrainerId() {
+    public int getTrainerId() {
         return trainerId;
     }
 
-    public void setTrainerId(UUID trainerId) {
+    public void setTrainerId(int trainerId) {
         this.trainerId = trainerId;
     }
 
@@ -40,19 +40,12 @@ public class Trainer extends User {
         this.services = services;
     }
 
-    public String getWorkoutPlan() {
-        return workoutPlan;
+    public String getTrainerTitle() {
+        return trainerTitle;
     }
 
-    public void setWorkoutPlan(String workoutPlan) {
-        this.workoutPlan = workoutPlan;
+    public void setWorkoutPlan(String trainerTitle) {
+        this.trainerTitle = trainerTitle;
     }
 
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
-    }
 }
