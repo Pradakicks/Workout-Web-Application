@@ -1,0 +1,79 @@
+/* Container Styling */
+.profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e7cc71; /* Gold border */
+  border-radius: 12px; /* Rounded corners */
+  background-color: #fffef6; /* Off-white background */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 16px;
+  max-width: 600px;
+  margin: 16px auto;
+}
+
+/* Profile Image */
+.profile-image img {
+  border-radius: 50%; /* Circular image */
+  width: 80px; /* Adjust size as needed */
+  height: 80px;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+/* Info Section */
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333; /* Dark text color */
+}
+
+.profile-info h3 {
+  font-size: 0.8rem;
+  margin: 4px 0;
+  color: #666; /* Slightly lighter text for the title */
+}
+
+.profile-info h4 {
+  font-size: 0.8rem;
+  margin: 8px 0;
+  font-weight: bold;
+  color: #444; /* Subtle darker text for headings */
+}
+
+.profile-info p {
+  font-size: 0.7rem;
+  color: #555; /* Description text color */
+  margin: 8px 0;
+}
+
+/* Button */
+.see-more-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e7cc71; /* Gold color */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+}
+
+.see-more-button:hover {
+  background-color: #d4b861; /* Slightly darker gold on hover */
+  transform: translateY(-2px); /* Subtle hover effect */
+}
+
+.see-more-button span {
+  margin-right: 8px;
+}

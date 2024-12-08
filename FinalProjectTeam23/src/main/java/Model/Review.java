@@ -1,6 +1,5 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+package Model;
+
 import java.util.UUID;
 
 public class Review {
@@ -10,15 +9,33 @@ public class Review {
     private int rating;
     private String comment;
 
+    // Ctor new Review
+    public Review(UUID reviewId, UUID clientId, UUID trainerId, int rating, String comment) {
+        this.reviewId = reviewId;
+        this.clientId = clientId;
+        this.trainerId = trainerId;
+        this.rating = rating;
+        this.comment = comment;
+    }
+    
+    // Constructor for updating an existing Review
+    public Review(UUID reviewId, int rating, String comment) {
+        this.reviewId = reviewId;
+        this.rating = rating;
+        this.comment = comment;
+    }
+    
+ // Constructor for creating a review without specifying a reviewId
     public Review(UUID clientId, UUID trainerId, int rating, String comment) {
-        this.reviewId = UUID.randomUUID();
+        this.reviewId = UUID.randomUUID(); // Generate a new UUID
         this.clientId = clientId;
         this.trainerId = trainerId;
         this.rating = rating;
         this.comment = comment;
     }
 
-    public UUID getReviewId() {
+
+     public UUID getReviewId() {
         return reviewId;
     }
 
@@ -64,7 +81,8 @@ public class Review {
         return true;
     }
 
-    public boolean validate() {
+    // Validation for creating a new Review
+    public boolean validateForCreation() {
         if (clientId == null || trainerId == null) {
             System.err.println("Client ID and Trainer ID cannot be null.");
             return false;
@@ -79,33 +97,39 @@ public class Review {
         }
         return true;
     }
-    
-    //Review Implementation - For CLIENT ONLY
-    //placeholder values used for the db connection (Not yet implemented)
-    public boolean addReview(Connection dbConnection) {
-        if (dbConnection == null) {
-            System.err.println("No Database connection.");
+
+    // Validation for updating an existing Review
+    public boolean validateForUpdate() {
+        if (reviewId == null) {
+            System.err.println("Review ID cannot be null for an update.");
             return false;
         }
-
-        if (!validate()) {
-            System.err.println("Review validation failed.");
+        if (rating < 1 || rating > 5) {
+            System.err.println("Invalid rating: Rating must be between 1 and 5.");
             return false;
         }
-
-        String sql = "INSERT INTO Review (review_ID, client_ID, trainer_ID, Rating, Comment) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = dbConnection.prepareStatement(sql)) {
-            statement.setObject(1, reviewId); 
-            statement.setObject(2, clientId); 
-            statement.setObject(3, trainerId); 
-            statement.setInt(4, rating); 
-            statement.setString(5, comment);
-
-            int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            System.err.println("Could not save the review to the database: " + e.getMessage());
+        if (comment == null || comment.length() > 50) {
+            System.err.println("Invalid comment: Must not be null and must not exceed 50 characters.");
             return false;
         }
+        return true;
     }
+    
+    public boolean validate() {
+        // Ensure all required fields are valid
+        if (clientId == null || trainerId == null) {
+            System.err.println("Client ID and Trainer ID cannot be null.");
+            return false;
+        }
+        if (rating < 1 || rating > 5) {
+            System.err.println("Invalid rating: Rating must be between 1 and 5.");
+            return false;
+        }
+        if (comment == null || comment.length() > 50) {
+            System.err.println("Invalid comment: Must not be null and must not exceed 50 characters.");
+            return false;
+        }
+        return true;
+    }
+
 }
