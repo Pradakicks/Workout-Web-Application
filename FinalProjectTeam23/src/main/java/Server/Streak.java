@@ -1,4 +1,4 @@
-package Model;
+package Server;
 import java.sql.Timestamp;
 
 public class Streak {

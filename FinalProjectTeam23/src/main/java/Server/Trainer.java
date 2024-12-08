@@ -1,6 +1,4 @@
-package Model;
-
-import Model.User;
+package Server;
 
 public class Trainer extends User {
     private int trainerId;
