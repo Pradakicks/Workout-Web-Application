@@ -1,14 +1,14 @@
+package Model;
 import java.sql.Timestamp;
-import java.util.UUID;
 
 public class Streak {
-    private UUID streakId;
-    private UUID clientId;
+    private int streakId;
+    private int clientId;
     private int currentStreak; 
     private int longestStreak;
     private Timestamp lastCheckin;
 
-    public Streak(UUID streakId, UUID clientId, int currentStreak, int longestStreak, Timestamp lastCheckin) {
+    public Streak(int streakId, int clientId, int currentStreak, int longestStreak, Timestamp lastCheckin) {
         this.streakId = streakId;
         this.clientId = clientId;
         this.currentStreak = currentStreak;
@@ -16,19 +16,19 @@ public class Streak {
         this.lastCheckin = lastCheckin;
     }
 
-    public UUID getStreakId() {
+    public int getStreakId() {
         return streakId;
     }
 
-    public void setStreakId(UUID streakId) {
+    public void setStreakId(int streakId) {
         this.streakId = streakId;
     }
 
-    public UUID getClientId() {
+    public int getClientId() {
         return clientId;
     }
 
-    public void setClientId(UUID clientId) {
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
