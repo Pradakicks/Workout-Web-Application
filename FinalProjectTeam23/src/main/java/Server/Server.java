@@ -1,6 +1,7 @@
 package Server;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-//need to do backend for profiles!!!!!
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 @WebServlet("/Server")
 public class Server extends HttpServlet{
@@ -35,7 +31,18 @@ public class Server extends HttpServlet{
         if (session != null) {
             userID = (Integer) session.getAttribute("user_id");
         }
+        
+        if (userID != null) {
+            // Assuming getTrainer function is defined in your DBCConnection class
+             List<Trainer> trainers = DBConnection.getTrainers();
 
-
+            if (trainers != null) {
+                // Convert the trainer object to JSON and send it as a response
+                out.println(gson.toJson(trainers));
+            } else {
+                // If no trainer is found, send an empty JSON object
+                out.println("{}");
+            }
+        }
     }
 }
