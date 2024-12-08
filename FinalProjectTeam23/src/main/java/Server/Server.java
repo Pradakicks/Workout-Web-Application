@@ -45,7 +45,5 @@ public class Server extends HttpServlet{
                 out.println("{}");
             }
         }
-
-
     }
 }
