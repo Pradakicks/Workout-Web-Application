@@ -103,9 +103,6 @@ public class ProfilePictureUploadServlet extends HttpServlet {
                     throw new SQLException("User not found or profile picture update failed.");
                 }
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Error: Database driver not found.");
         }
 
         return imageUrl;

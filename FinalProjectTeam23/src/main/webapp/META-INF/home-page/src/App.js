@@ -139,18 +139,23 @@ const App = () => {
           backgroundColor: "rgb(245, 245, 245)",
           gridTemplateColumns: "repeat(2, 1fr)",
           marginTop: "150px",
-          gap: "20px",
-          width: "90%",
-        }}
-      >
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-      </div>
+          gap: "20px", // Optional: Adds spacing between rows and columns
+          width: "90%", // Responsive grid width
+        }}>
+        {loading ? (
+          <p>Loading trainers...</p>
+        ) : (
+          trainers.map(trainer => (
+            <ProfileCard key={trainer.trainerId} trainer={trainer} />
+          ))
+        )}
+      </div> 
     </div>
   );
 };
+/*For each trainer in the trainers array, it renders a ProfileCard component.
+Each ProfileCard gets a key prop, which is necessary for React to keep track of 
+elements in the list efficiently. The trainer.trainerId is used as the unique key.*/
 
 const AppRoutes = () => (
   <Routes>
