@@ -11,25 +11,6 @@ import "./App.css";
 const App = () => {
   const logoHeight = 80;
 
-  const [trainers, setTrainers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  let baseURL = window.location.origin + "/FinalProjectTeam23/";
-  var url = new URL("Weather", baseURL);
-
-  useEffect(() => {
-    fetch(url)
-      .then(response => response.json()) 
-      .then(data => {
-        setTrainers(data); 
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error("Error fetching trainers:", error);
-        setLoading(false); 
-      });
-  }, []);
-
   return (
     <div
       style={{
