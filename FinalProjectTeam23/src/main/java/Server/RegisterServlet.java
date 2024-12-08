@@ -1,9 +1,9 @@
 package Server;
 
 import Model.*;
-import SQL;
+import SQL.*;
 import com.google.gson.Gson;
-
+import SQL.DBConnection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -15,6 +15,13 @@ import java.util.UUID;
 public class RegisterServlet extends HttpServlet {
 
     private static final Gson gson = new Gson();
+    private DBConnection dbConnection;
+
+    @Override
+    public void init() throws ServletException {
+        // Initialize DBConnection
+        dbConnection = new DBConnection();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,13 +30,15 @@ public class RegisterServlet extends HttpServlet {
         User user = gson.fromJson(reader, User.class);
         PrintWriter out = response.getWriter();
 
+        // Validate required fields
         if (user.getUsername() == null || user.getPasswordHash() == null || user.getRole() == null) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             out.println("{\"error\": \"Missing required fields: username, password, or role.\"}");
             return;
         }
 
-        if (registerUser(user)) {
+        // Register user using DBConnection
+        if (dbConnection.registerUser(user)) {
             response.setStatus(HttpServletResponse.SC_CREATED);
             out.println("{\"message\": \"User registered successfully.\"}");
         } else {
@@ -40,30 +49,9 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        try {
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private boolean registerUser(User user) {
-        String query = "INSERT INTO Users (user_ID, username, password_hash, email, role) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, user.getUserId().toString());
-            stmt.setString(2, user.getUsername());
-            stmt.setString(3, user.getPasswordHash());
-            stmt.setString(4, user.getEmail());
-            stmt.setString(5, user.getRole());
-
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            if (e.getErrorCode() == 1062) {
-                System.err.println("Duplicate entry: " + e.getMessage());
-            } else {
-                e.printStackTrace();
-            }
-            return false;
+        // Close the database connection when the servlet is destroyed
+        if (dbConnection != null) {
+            dbConnection.closeConnection();
         }
     }
 }

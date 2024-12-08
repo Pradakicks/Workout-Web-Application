@@ -11,7 +11,7 @@ public class User {
     private String role; // client or trainer
 
     public User(UUID userId, String username, String passwordHash, String email, String profilePicture, String role) {
-        this.userId = UUID.randomUUID();
+        this.userId = userId;
         this.username = username;
         this.passwordHash = passwordHash;
         this.email = email;

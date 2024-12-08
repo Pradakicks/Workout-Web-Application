@@ -7,6 +7,8 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.util.List;
 import java.util.UUID;
+import SQL.DBConnection;
+import Model.*;
 
 @WebServlet("/reviews")
 public class ReviewServlet extends HttpServlet {

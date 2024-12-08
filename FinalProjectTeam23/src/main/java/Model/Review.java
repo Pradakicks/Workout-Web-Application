@@ -10,20 +10,30 @@ public class Review {
     private String comment;
 
     // Ctor new Review
+    public Review(UUID reviewId, UUID clientId, UUID trainerId, int rating, String comment) {
+        this.reviewId = reviewId;
+        this.clientId = clientId;
+        this.trainerId = trainerId;
+        this.rating = rating;
+        this.comment = comment;
+    }
+    
+    // Constructor for updating an existing Review
+    public Review(UUID reviewId, int rating, String comment) {
+        this.reviewId = reviewId;
+        this.rating = rating;
+        this.comment = comment;
+    }
+    
+ // Constructor for creating a review without specifying a reviewId
     public Review(UUID clientId, UUID trainerId, int rating, String comment) {
-        this.reviewId = UUID.randomUUID();
+        this.reviewId = UUID.randomUUID(); // Generate a new UUID
         this.clientId = clientId;
         this.trainerId = trainerId;
         this.rating = rating;
         this.comment = comment;
     }
 
-    //Existing Review
-    public Review(UUID reviewId, int rating, String comment) {
-        this.reviewId = reviewId;
-        this.rating = rating;
-        this.comment = comment;
-    }
 
      public UUID getReviewId() {
         return reviewId;
@@ -104,4 +114,22 @@ public class Review {
         }
         return true;
     }
+    
+    public boolean validate() {
+        // Ensure all required fields are valid
+        if (clientId == null || trainerId == null) {
+            System.err.println("Client ID and Trainer ID cannot be null.");
+            return false;
+        }
+        if (rating < 1 || rating > 5) {
+            System.err.println("Invalid rating: Rating must be between 1 and 5.");
+            return false;
+        }
+        if (comment == null || comment.length() > 50) {
+            System.err.println("Invalid comment: Must not be null and must not exceed 50 characters.");
+            return false;
+        }
+        return true;
+    }
+
 }

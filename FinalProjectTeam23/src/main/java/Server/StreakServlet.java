@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.Instant;
+import Model.*;
+import SQL.DBConnection;
 
 @WebServlet("/update-streak")
 public class StreakServlet extends HttpServlet {
@@ -29,19 +31,19 @@ public class StreakServlet extends HttpServlet {
             boolean isUpdated = updateStreak(clientId);
 
             if (isUpdated) {
-            	int updatedStreak = getCurrentStreak(clientId);
+                int updatedStreak = getCurrentStreak(clientId);
 
                 // Send success response with updated streak value
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.getWriter().write("Streak updated successfully! Current streak: " + updatedStreak);
-            } 
+            }
         } catch (NumberFormatException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.getWriter().write("Error: Invalid clientId format.");
             e.printStackTrace();
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write("Error thrown herefjrgfnmjrglnr: " + e.getMessage());
+            resp.getWriter().write("Error: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -54,7 +56,7 @@ public class StreakServlet extends HttpServlet {
         try {
             System.out.println("Fetching streak for client ID: " + clientId);
             String query = "SELECT current_streak, longest_streak, last_checkin FROM Streaks WHERE client_ID = " + clientId;
-            try (Connection conn = Database.getConnection()) {
+            try (Connection conn = DBConnection.getConnection()) {  // Changed to DBConnection.getConnection()
                 if (conn == null) {
                     throw new Exception("Failed to establish database connection.");
                 }
@@ -77,9 +79,9 @@ public class StreakServlet extends HttpServlet {
             return false;
         }
 
-        // Get the current date 
+        // Get the current date
         java.util.Date nowDate = new java.util.Date();
-        java.sql.Date currentDate = new java.sql.Date(nowDate.getTime()); 
+        java.sql.Date currentDate = new java.sql.Date(nowDate.getTime());
 
         java.sql.Date lastCheckinDate = new java.sql.Date(lastCheckin.getTime());
 
@@ -104,7 +106,7 @@ public class StreakServlet extends HttpServlet {
 
             // Update last check-in date to today
             lastCheckin = Timestamp.valueOf(currentDate.toString() + " 00:00:00");
-        } 
+        }
 
         try (Connection conn = DBConnection.getConnection()) {
             if (conn == null) {
@@ -125,29 +127,16 @@ public class StreakServlet extends HttpServlet {
                 System.out.println("Failed to update streak in Streaks table: No rows updated.");
                 throw new Exception("Failed to update streak in Streaks table.");
             }
-
-            // String updateClientQuery = "UPDATE Clients SET current_streak = " + currentStreak + " WHERE client_ID = " + clientId;
-            // int rowsUpdatedClient = stmt.executeUpdate(updateClientQuery);
-
-            // if (rowsUpdatedClient > 0) {
-            //     System.out.println("Current streak updated successfully in Clients table!");
-            //     return true;
-            // } else {
-            //     System.out.println("Failed to update current streak in Clients table: No rows updated.");
-            //     throw new Exception("Failed to update current streak in Clients table.");
-            // }
         } catch (Exception e) {
             System.out.println("Error during update operation: " + e.getMessage());
-            e.printStackTrace();  
-            return false; 
+            e.printStackTrace();
+            return false;
         }
     }
 
-
-
     private int getCurrentStreak(int clientId) {
         int currentStreak = 0;
-        try (Connection conn = DBConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {  // Changed to DBConnection.getConnection()
             if (conn == null) {
                 throw new Exception("Failed to establish database connection.");
             }
@@ -165,22 +154,21 @@ public class StreakServlet extends HttpServlet {
         return currentStreak;
     }
 
-
     private boolean createNewStreak(int clientId) throws Exception {
         Timestamp now = Timestamp.from(Instant.now());
-        String formattedTimestamp = now.toString(); 
+        String formattedTimestamp = now.toString();
 
-        try (Connection conn = DBConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {  // Changed to DBConnection.getConnection()
             Statement stmt = conn.createStatement();
-            
+
             String insertQuery = "INSERT INTO Streaks (client_ID, current_streak, longest_streak, last_checkin) " +
-                                 "VALUES (" + clientId + ", 1, 1, '" + formattedTimestamp + "')";
+                    "VALUES (" + clientId + ", 1, 1, '" + formattedTimestamp + "')";
             int rowsInserted = stmt.executeUpdate(insertQuery);
-            
+
             if (rowsInserted > 0) {
-            	String updateQuery = "UPDATE Clients SET current_streak = 1 WHERE client_ID = " + clientId;
+                String updateQuery = "UPDATE Clients SET current_streak = 1 WHERE client_ID = " + clientId;
                 int rowsUpdated = stmt.executeUpdate(updateQuery);
-                
+
                 if (rowsUpdated > 0) {
                     return true;
                 } else {
