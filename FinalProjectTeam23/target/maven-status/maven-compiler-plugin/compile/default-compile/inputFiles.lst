@@ -1,0 +1,15 @@
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/GetProfilePictureServlet.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/UpdateUserProfileServlet.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/ProfilePictureUploadServlet.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Model/Review.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/GetGoalsServlet.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Model/User.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/CORSFilter.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/DBConnector.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/RemoveGoalServlet.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/Server.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Model/Client.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/AddGoalServlet.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Model/Streak.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Server/GetUserProfileServlet.java
+/Users/ariellockett/Workout-Web-Application/FinalProjectTeam23/src/main/java/Model/Trainer.java

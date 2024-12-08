@@ -1,0 +1,60 @@
+.streak-card {
+	display: flex;
+	align-items: center;
+	/* justify-content: center; */
+	border: 1px solid #C58888; /* Gold border */
+	border-radius: 12px; /* Rounded corners */
+	background-color: #FFF8F8; /* Off-white background */
+	padding: 20px;
+	max-width: 700px;
+	min-height: 200px;
+	margin: 16px auto;
+  }
+
+
+  .data-card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #DFDFDF; /* Gold border */
+	border-radius: 12px; /* Rounded corners */
+	background-color: #FBFBFB; /* Off-white background */
+	padding: 12px;
+	max-width: 600px;
+	max-height: 70px;
+	/* margin: 16px auto; */
+  }
+
+  .trainer-preview-card {
+	display: flex;
+	align-items: center;
+	/* justify-content: center; */
+	border: 1px solid #e7cc71; /* Gold border */
+	border-radius: 12px; /* Rounded corners */
+	background-color: #fffef6; /* Off-white background */
+	padding: 24px;
+	max-width: 600px;
+	max-height: 170px;
+	margin: 16px auto;
+  }
+
+  .workout-plan {
+	display: flex;
+	justify-content: center;
+	border: 1px solid #489FD1; /* Gold border */
+	border-radius: 12px; /* Rounded corners */
+	background-color: #F4FBFF; /* Off-white background */
+	padding: 25px;
+	max-width: 730px;
+	max-height: 300px;
+	margin-top: 16px;
+	gap: 2em;
+  }
+
+  .workout-item {
+	background-color: #D2E8F5;
+	padding: 20px;
+	border-radius: 12px; /* Rounded corners */
+	max-width: 140px;
+	
+  }
