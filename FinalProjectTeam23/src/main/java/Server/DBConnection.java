@@ -1,4 +1,4 @@
-package Model;
+package Server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,9 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.Timestamp;
+import Model.*;
 
 public class DBConnection{
-    private Connection conn;
+    private static Connection conn;
 	
         @SuppressWarnings("CallToPrintStackTrace")
 	public DBConnection() throws SQLException {
@@ -25,6 +29,10 @@ public class DBConnection{
             e.printStackTrace();
         }
     }
+     // Method to return the database connection
+        public static Connection getConnection() {
+            return conn;
+        }
 
     public boolean registerUser() {
         return true;
@@ -142,8 +150,9 @@ public class DBConnection{
             return "Error fetching streak details";
         }
     }
-    //getWorkoutplan
     
+    //getWorkoutplan
+
     public static List<Review> fetchTrainerReviews(int trainerId) {
         String query = "SELECT reviewId, clientId, trainerId, rating, comment FROM reviews WHERE trainerId = ?";
         List<Review> reviews = new ArrayList<>();

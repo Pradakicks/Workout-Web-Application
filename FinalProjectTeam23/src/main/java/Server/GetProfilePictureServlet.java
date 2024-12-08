@@ -1,4 +1,5 @@
 package Server;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Connection;
@@ -35,53 +36,40 @@ public class GetProfilePictureServlet extends HttpServlet {
             return;
         }
 
-        Connection connection = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        // Using try-with-resources for automatic closing of resources
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement("SELECT profile_picture FROM Users WHERE user_id = ?")) {
 
-        try {
-            connection = DBConnection.getConnection();
             if (connection == null) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("{\"error\": \"Failed to establish database connection\"}");
                 return;
             }
 
-            String query = "SELECT profile_picture FROM Users WHERE user_id = ?";
-            pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, userId);
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                byte[] profilePictureData = rs.getBytes("profile_picture");
-                if (profilePictureData != null) {
-                    response.setContentType("image/png");
-                    response.setContentLength(profilePictureData.length);
-                    try (OutputStream out = response.getOutputStream()) {
-                        out.write(profilePictureData);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    byte[] profilePictureData = rs.getBytes("profile_picture");
+                    if (profilePictureData != null) {
+                        response.setContentType("image/png");
+                        response.setContentLength(profilePictureData.length);
+                        try (OutputStream out = response.getOutputStream()) {
+                            out.write(profilePictureData);
+                        }
+                    } else {
+                        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                        response.getWriter().write("{\"error\": \"Profile picture not found\"}");
                     }
                 } else {
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                    response.getWriter().write("{\"error\": \"Profile picture not found\"}");
+                    response.getWriter().write("{\"error\": \"User not found\"}");
                 }
-            } else {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                response.getWriter().write("{\"error\": \"User not found\"}");
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{\"error\": \"Database error occurred\"}");
-        } catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-            try {
-                if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
-                if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
 }

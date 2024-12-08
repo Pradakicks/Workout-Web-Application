@@ -15,9 +15,10 @@ public class User {
         this.name = name;
         this.passwordHash = passwordHash;
         this.email = email;
-        this.profilePicture = profilePicture;
+        this.profilePicture = (profilePicture != null) ? profilePicture : "default.jpg"; // default to "default.jpg"
         this.role = role;
     }
+
 
     public int getUserId() {
         return userId;

@@ -6,8 +6,8 @@ public class Client extends User {
     private String workoutPlan; 
     private Streak streak;
 
-    public Client(int userId, String username, String passwordHash, String email, String profilePicture, String role, int clientId, String goals, String workoutPlan, Streak streak) {
-        super(userId, username, passwordHash, email, profilePicture, role);
+    public Client(int userId, String username, String passwordHash, String email, String profilePicture, String role, String name, int clientId, String goals, String workoutPlan, Streak streak) {
+        super(userId, username, name, passwordHash, email, profilePicture, role);  // Pass 'name' as the missing argument
         this.clientId = clientId;
         this.goals = goals;
         this.workoutPlan = workoutPlan;

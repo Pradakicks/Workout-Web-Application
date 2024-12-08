@@ -26,8 +26,10 @@ public class GetGoalsServlet extends HttpServlet {
         PrintWriter pw = response.getWriter();
         response.setContentType("application/json");
 
+        // Retrieve clientId from request parameters
         String clientIdParam = request.getParameter("clientId");
 
+        // Check if clientId is missing or empty
         if (clientIdParam == null || clientIdParam.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.write("{\"error\": \"clientId is required\"}");
@@ -36,6 +38,7 @@ public class GetGoalsServlet extends HttpServlet {
 
         int clientId;
         try {
+            // Parse clientId to integer
             clientId = Integer.parseInt(clientIdParam);
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -43,49 +46,38 @@ public class GetGoalsServlet extends HttpServlet {
             return;
         }
 
-        Connection connection = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        // Try to establish a connection and fetch goals
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement("SELECT goal FROM Goals WHERE client_id = ?")) {
 
-        try {
-            connection = DBConnection.getConnection();
-
-            if (connection == null) {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                pw.write("{\"error\": \"Failed to establish database connection\"}");
-                return;
-            }
-
-            String query = "SELECT goal FROM Goals WHERE client_id = ?";
-            stmt = connection.prepareStatement(query);
+            // Set the clientId parameter for the query
             stmt.setInt(1, clientId);
 
-            rs = stmt.executeQuery();
-            List<String> goals = new ArrayList<>();
+            // Execute the query and fetch the results
+            try (ResultSet rs = stmt.executeQuery()) {
+                List<String> goals = new ArrayList<>();
 
-            while (rs.next()) {
-                goals.add(rs.getString("goal"));
+                // Add goals to the list
+                while (rs.next()) {
+                    goals.add(rs.getString("goal"));
+                }
+
+                // If no goals found, return a 404 status
+                if (goals.isEmpty()) {
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    pw.write("{\"error\": \"No goals found for the specified clientId\"}");
+                } else {
+                    // Convert goals list to JSON and send it in the response
+                    Gson gson = new Gson();
+                    String jsonResponse = gson.toJson(goals);
+                    pw.write(jsonResponse);
+                }
             }
-
-            Gson gson = new Gson();
-            String jsonResponse = gson.toJson(goals);
-            pw.write(jsonResponse);
 
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             pw.write("{\"error\": \"Database error occurred: " + e.getMessage() + "\"}");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace(); 
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            pw.write("{\"error\": \"JDBC Driver not found: " + e.getMessage() + "\"}");
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (connection != null) connection.close();
-            } catch (SQLException ignored) {
-            }
         }
     }
 }

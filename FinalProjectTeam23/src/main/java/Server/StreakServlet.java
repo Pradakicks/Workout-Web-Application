@@ -1,5 +1,6 @@
 package Server;
 
+import Model.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +55,7 @@ public class StreakServlet extends HttpServlet {
         try {
             System.out.println("Fetching streak for client ID: " + clientId);
             String query = "SELECT current_streak, longest_streak, last_checkin FROM Streaks WHERE client_ID = " + clientId;
-            try (Connection conn = Database.getConnection()) {
+            try (Connection conn = DBConnection.getConnection()) {
                 if (conn == null) {
                     throw new Exception("Failed to establish database connection.");
                 }
