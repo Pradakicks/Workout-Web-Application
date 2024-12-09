@@ -1,20 +1,20 @@
 import React from "react";
-import ProfileCard from "./components/ProfileCard";
-import Header from "./components/Header";
-import ProfileHeader from "./components/ProfileHeader";
-import StreakCard from "./components/StreakCard";
-import SmallDataCard from "./components/SmallDataCard";
-import TrainerPreviewCard from "./components/TrainerPreviewCard";
+import ProfileCard from "./ProfileCard";
+import Header from "./Header";
+import ProfileHeader from "./ProfileHeader";
+import StreakCard from "./StreakCard";
+import SmallDataCard from "./SmallDataCard";
+import TrainerPreviewCard from "./TrainerPreviewCard";
 
-import "./App.css";
+import "../App.css";
 
-import shoe from "./assets/shoe.svg";
-import plate from "./assets/plate.svg";
-import water from "./assets/water.svg";
-import scale from "./assets/scale.svg";
-import online from "./assets/online.svg";
-import offline from "./assets/offline.svg";
-import WorkoutPlan from "./components/WorkoutPlan";
+import shoe from "../assets/shoe.svg";
+import plate from "../assets/plate.svg";
+import water from "../assets/water.svg";
+import scale from "../assets/scale.svg";
+import online from "../assets/online.svg";
+import offline from "../assets/offline.svg";
+import WorkoutPlan from "./WorkoutPlan";
 
 const Dashboard = () => {
 

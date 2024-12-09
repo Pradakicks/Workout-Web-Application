@@ -6,14 +6,32 @@ import ProfileCard from "./components/ProfileCard";
 import SearchBar from "./components/SearchBar";
 import CircleButton from "./components/CircleButton";
 import ProfileButton from "./components/ProfileButton";
-import ReviewPage from "./components/ReviewPage";
 import "./App.css";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 
 const App = () => {
   const logoHeight = 80;
-  return (<Login />)
+
+  const [trainers, setTrainers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  let baseURL = window.location.origin + "/FinalProjectTeam23/";
+  var url = new URL("Weather", baseURL);
+
+  useEffect(() => {
+    fetch(url)
+      .then(response => response.json()) 
+      .then(data => {
+        setTrainers(data); 
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error("Error fetching trainers:", error);
+        setLoading(false); 
+      });
+  }, []);
+
   return (
     <div
       style={{
@@ -117,13 +135,19 @@ const App = () => {
           gap: "20px", // Optional: Adds spacing between rows and columns
           width: "90%", // Responsive grid width
         }}>
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-      </div>
+        {loading ? (
+          <p>Loading trainers...</p>
+        ) : (
+          trainers.map(trainer => (
+            <ProfileCard key={trainer.trainerId} trainer={trainer} />
+          ))
+        )}
+      </div> 
     </div>
   );
 };
+/*For each trainer in the trainers array, it renders a ProfileCard component.
+Each ProfileCard gets a key prop, which is necessary for React to keep track of 
+elements in the list efficiently. The trainer.trainerId is used as the unique key.*/
 
 export default App;
