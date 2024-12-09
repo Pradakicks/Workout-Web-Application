@@ -1,7 +1,7 @@
 import React from "react";
 import SearchIcon from "../assets/search.svg"; // Path to your custom search SVG
 
-const SearchBar = () => {
+const SearchBar = ({onSearch}) => {
   return (
     <div
       style={{
@@ -28,6 +28,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Search..."
+        onChange = {onSearch}
         style={{
           flex: "1", // Take the remaining width
           border: "none", // Remove input border

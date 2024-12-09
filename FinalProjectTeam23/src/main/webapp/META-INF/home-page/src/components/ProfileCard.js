@@ -3,7 +3,7 @@ import "./ProfileCard.css"; // Import CSS for styling
 import profileImage from "../assets/example-trainer.png"; // Replace with your image path
 import dumbbellIcon from "../assets/dumbbell.svg";
 
-const ProfileCard = () => {
+const ProfileCard = ({ trainer }) => {
   return (
     <div className="profile-card">
       <div className="profile-image">
@@ -15,15 +15,10 @@ const ProfileCard = () => {
       </div>
       
       <div className="profile-info">
-        <h2>Jake Carter</h2>
-        <h3>Strength & Conditioning Coach</h3>
+        <h2>{trainer.name}</h2> {/* Display trainer's name */}
+        <h3>{trainer.trainerTitle}</h3> {/* Display trainer's title */}
         <h4>About</h4>
-        <p>
-          As a dedicated Strength & Conditioning Coach, I design workouts that
-          are tailored to help you achieve peak physical performance. With years
-          of experience and a deep understanding of exercise science, I focus on
-          creating programs that are safe and effective.
-        </p>
+        <p>{trainer.services}</p> {/* Display trainer's services */}
         <button className="see-more-button" style={{ marginLeft: 70 }}>
           <img
             src={dumbbellIcon}

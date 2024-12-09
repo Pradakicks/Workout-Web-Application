@@ -19,6 +19,15 @@ public class Server extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Set CORS headers to allow requests from your React app
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.setHeader("Access-Control-Allow-Credentials", "true");  // Optional, if you're handling cookies
+
+        response.setStatus(HttpServletResponse.SC_OK);
+
+
     	@SuppressWarnings("unused")
         PrintWriter out = response.getWriter();
     	response.setContentType("application/json");
@@ -31,10 +40,15 @@ public class Server extends HttpServlet{
         if (session != null) {
             userID = (Integer) session.getAttribute("user_id");
         }
+
+        userID = 1;
         
         if (userID != null) {
             // Assuming getTrainer function is defined in your DBCConnection class
              List<Trainer> trainers = DBConnection.getTrainers();
+             for(Trainer trainer : trainers){
+                System.out.println(trainer.getTrainerId());
+             }
 
             if (trainers != null) {
                 // Convert the trainer object to JSON and send it as a response
