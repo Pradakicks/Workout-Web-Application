@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
+import defaultImage from '../assets/no-pfp.webp'; 
 
 const SettingsProfileButton = ({ profilePicture }) => {
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   const fetchUserProfilePicture = () => {
     const userId = localStorage.getItem('userId');
@@ -19,15 +20,15 @@ const SettingsProfileButton = ({ profilePicture }) => {
         if (response.ok) {
           return response.blob();
         } else {
-          //throw new Error("Failed to fetch profile picture");
+          // If there's an error fetching the image, set to false to stop loading.
+          setLoading(false);
         }
       })
       .then((imageBlob) => {
-        // Handle image blob (if needed)
         setLoading(false);
       })
       .catch((err) => {
-        // Handle error (optional)
+        setLoading(false);
       });
   };
 
@@ -67,12 +68,12 @@ const SettingsProfileButton = ({ profilePicture }) => {
             style={{
               width: "100%",
               height: "100%",
-              backgroundColor: '#ccc',
+              backgroundColor: '#ccc', // Grey background while loading
             }}
           ></div>
         ) : (
           <img
-            src={profilePicture}
+            src={profilePicture || defaultImage} // Fallback to defaultImage if no profilePicture is provided
             alt="Profile"
             style={{
               width: "100%",
