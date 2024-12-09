@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import logo from "./assets/logo.svg";
 import edit from "./assets/edit.svg";
 import settings from "./assets/settings.svg";
@@ -7,8 +8,7 @@ import SearchBar from "./components/SearchBar";
 import CircleButton from "./components/CircleButton";
 import ProfileButton from "./components/ProfileButton";
 import "./App.css";
-import Dashboard from "./Dashboard";
-import Login from "./Login";
+
 
 const App = () => {
   const logoHeight = 80;
