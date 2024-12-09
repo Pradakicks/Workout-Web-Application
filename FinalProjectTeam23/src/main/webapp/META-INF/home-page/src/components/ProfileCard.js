@@ -3,7 +3,7 @@ import "./ProfileCard.css"; // Import CSS for styling
 import profileImage from "../assets/example-trainer.png"; // Replace with your image path
 import dumbbellIcon from "../assets/dumbbell.svg";
 
-const ProfileCard = () => {
+const ProfileCard = ({ trainer }) => {
   return (
     <div className="profile-card">
       <div className="profile-image">

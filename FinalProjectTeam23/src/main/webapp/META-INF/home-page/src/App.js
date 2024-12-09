@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./assets/logo.svg";
 import edit from "./assets/edit.svg";
 import settings from "./assets/settings.svg";
@@ -10,28 +10,50 @@ import "./App.css";
 
 const App = () => {
   const logoHeight = 80;
+  // const cors = require("cors");
+  // App.use(cors());
+  // var corsOptions = {
+  //   origin: "http://localhost:3000"
+  // };
+  
+  // app.use(cors(corsOptions));
 
   const [trainers, setTrainers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filteredTrainers, setFilteredTrainers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  let baseURL = window.location.origin + "/FinalProjectTeam23/";
-  var url = new URL("Weather", baseURL);
+  let baseURL = "http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/";
+  var url = new URL("Server", baseURL);
 
   useEffect(() => {
-    fetch(url)
-      .then(response => response.json()) 
-      .then(data => {
-        setTrainers(data); 
-        setFilteredTrainers(data);
-        setLoading(false);
+    fetch(url, {
+      mode: 'no-cors',
+      method: "GET",
+      credentials: "include", // This includes cookies if required
+    })
+      .then(response => {
+        console.log('Response Status:', response.status); // Log status code
+        console.log('actual url:', url);
+        return response.text(); // Get raw text first
+      }) 
+      .then(text => {
+        console.log('Response Body:', text); // Log the body of the response
+        try {
+          const data = JSON.parse(text); // Try to parse the response manually
+          setTrainers(data);
+          setFilteredTrainers(data);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+          setLoading(false);
+        }
       })
       .catch(error => {
         console.error("Error fetching trainers:", error);
         setLoading(false); 
       });
-  }, []);
+  }, [url]);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
