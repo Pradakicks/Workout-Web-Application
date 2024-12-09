@@ -10,6 +10,8 @@ import ProfileButton from "./components/ProfileButton";
 import SettingsPage from "./components/SettingsPage";
 import Dashboard from "./components/Dashboard";
 import "./App.css";
+import Dashboard from "./Dashboard";
+import Login from "./Login";
 
 const App = () => {
   const logoHeight = 80;
