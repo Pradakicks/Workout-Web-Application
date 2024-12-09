@@ -9,10 +9,11 @@ import ProfileButton from "./components/ProfileButton";
 import ReviewPage from "./components/ReviewPage";
 import "./App.css";
 import Dashboard from "./Dashboard";
+import Login from "./Login";
 
 const App = () => {
   const logoHeight = 80;
-  return (< Dashboard/>)
+  return (<Login />)
   return (
     <div
       style={{

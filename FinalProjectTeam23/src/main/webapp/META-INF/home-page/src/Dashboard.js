@@ -32,7 +32,7 @@ const Dashboard = () => {
       
       <Header />
       <ProfileHeader />
-
+ 
       {/* Dashboard container */}
       <div style={{display: "flex", marginTop: "3em", marginBottom: "5em"}}> 
       {/* Left column */}
