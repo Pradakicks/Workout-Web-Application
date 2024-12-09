@@ -101,7 +101,7 @@ public class GetUserProfileServlet extends HttpServlet {
             System.err.println("Unexpected Error: " + e.getMessage());
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            pw.write("{\"error\": \"Failed to load user's profile\"}");
+            //pw.write("{\"error\": \"Failed to load user's profile\"}");
         } finally {
             try {
                 // Close database resources

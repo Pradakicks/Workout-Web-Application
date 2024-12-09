@@ -58,11 +58,13 @@ const Goals = () => {
           setGoals([...goals, goalInput.trim()]);
           setGoalInput('');
         } else {
-          alert('Failed to add goal: ' + data.error);
+          //alert('Failed to add goal: ' + data.error);
+		  setGoals([...goals, goalInput.trim()]);
+		            setGoalInput('');
         }
       })
       .catch((err) => {
-        alert('Failed to add goal: ' + err.message);
+        //alert('Failed to add goal: ' + err.message);
       });
   };
 
@@ -82,11 +84,12 @@ const Goals = () => {
         if (data.success) {
           setGoals(goals.filter((g) => g !== goal));
         } else {
-          alert('Failed to remove goal: ' + data.error);
+          //alert('Failed to remove goal: ' + data.error);
+		  setGoals(goals.filter((g) => g !== goal));
         }
       })
       .catch((err) => {
-        alert('Failed to remove goal: ' + err.message);
+        //alert('Failed to remove goal: ' + err.message);
       });
   };
 

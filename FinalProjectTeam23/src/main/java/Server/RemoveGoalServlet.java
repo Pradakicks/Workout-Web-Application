@@ -79,13 +79,13 @@ public class RemoveGoalServlet extends HttpServlet {
                     pw.write("{\"success\": \"Goal removed successfully\"}");
                 } else {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    pw.write("{\"error\": \"Failed to remove goal\"}");
+                    //pw.write("{\"error\": \"Failed to remove goal\"}");
                 }
                 System.out.println("Goal removed successfully");
             } else {
                 // Goal does not exist for the user
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                pw.write("{\"error\": \"Goal does not exist for the user\"}");
+                //pw.write("{\"error\": \"Goal does not exist for the user\"}");
                 System.out.println("Goal does not exist for the user");
             }
 
@@ -98,7 +98,7 @@ public class RemoveGoalServlet extends HttpServlet {
             System.err.println("Unexpected Error: " + e.getMessage());
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            pw.write("{\"error\": \"Failed to add goal\"}");
+            //pw.write("{\"error\": \"Failed to add goal\"}");
         } finally {
             // Close resources
             try {

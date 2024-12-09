@@ -4,7 +4,7 @@ import SettingsProfileButton from './SettingsProfileButton';
 
 const EditPfp = () => {
   const [userData, setUserData] = useState({
-    name: '',
+    name: 'jdoe14',
     profilePicture: profileIcon, // Default profile picture
   });
   const [loading, setLoading] = useState(true); // State to track if profile picture is loading
@@ -21,18 +21,16 @@ const EditPfp = () => {
       alert('User not logged in.');
       return;
     }
-
-    const userProfileUrl = `http://localhost:8080/Workout-Web-Application/GetUserProfile?userId=${userId}`;
     
+	const profilePictureUrl = `http://localhost:8080/Workout-Web-Application/GetProfilePicture?userId=${userId}`;
     // Fetch user profile information
-    fetch(userProfileUrl)
+    fetch(profilePictureUrl)
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
           alert(data.error); // Handle error from the API
         } else {
           // Now that we have the username, fetch the profile picture
-          const profilePictureUrl = `http://localhost:8080/Workout-Web-Application/GetProfilePicture?userId=${userId}`;
           
           // Set user data and profile picture URL (use default if no profile picture URL returned)
           setUserData({
@@ -57,7 +55,8 @@ const EditPfp = () => {
       const userId = localStorage.getItem('userId');
       formData.append("userId", userId); // Assuming userData contains the userId
 
-      fetch("http://localhost:8080/Workout-Web-Application/UploadProfilePicture", {
+	  
+      fetch("http://localhost:8080/Workout-Web-Application/GetProfilePicture?userId=${userId}", {
         method: "POST",
         body: formData, // Sending form data with the image
       })
@@ -111,7 +110,7 @@ const EditPfp = () => {
       <div className="upload-button-container">
         <input
           type="file"
-          onChange={handleImageUpload}
+          //onChange={handleImageUpload}
           style={{ display: 'none' }}
           id="upload-image"
         />

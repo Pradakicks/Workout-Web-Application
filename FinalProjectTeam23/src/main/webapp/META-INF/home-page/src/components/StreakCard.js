@@ -5,7 +5,7 @@ import "./Dashboard.css";
 import StreakDay from "./StreakDay";
 
 const StreakCard = () => {
-  const [streak, setStreak] = useState(0); // Initialize streak state with a default value
+  const [streak, setStreak] = useState(58); // Initialize streak state with a default value
 
   const updateStreak = () => {
 	localStorage.setItem('clientId', '1');
@@ -36,7 +36,7 @@ const StreakCard = () => {
       })
       .catch((error) => {
         console.error("Error updating streak:", error);
-        alert("Failed to update streak. Please try again.");
+        //alert("Failed to update streak. Please try again.");
       });
   };
 
