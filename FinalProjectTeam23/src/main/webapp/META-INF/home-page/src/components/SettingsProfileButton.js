@@ -19,7 +19,7 @@ const SettingsProfileButton = ({ profilePicture }) => {
         if (response.ok) {
           return response.blob();
         } else {
-          throw new Error("Failed to fetch profile picture");
+          //throw new Error("Failed to fetch profile picture");
         }
       })
       .then((imageBlob) => {

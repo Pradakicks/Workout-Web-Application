@@ -41,7 +41,7 @@ public class UpdateUserProfileServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             System.out.println("Error: Invalid userId format - " + userIdParam);
-            pw.write("{\"error\": \"Invalid userId format\"}");
+            //pw.write("{\"error\": \"Invalid userId format\"}");
             return;
         }
 
@@ -54,7 +54,7 @@ public class UpdateUserProfileServlet extends HttpServlet {
 
             if (connection == null) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                pw.write("{\"error\": \"Failed to establish database connection\"}");
+                //pw.write("{\"error\": \"Failed to establish database connection\"}");
                 return;
             }
 
@@ -103,24 +103,24 @@ public class UpdateUserProfileServlet extends HttpServlet {
                     pw.println("{\"success\": \"User profile updated successfully\"}");
                 } else {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    pw.println("{\"error\": \"Failed to update user profile\"}");
+                    //pw.println("{\"error\": \"Failed to update user profile\"}");
                 }
             } else {
                 // User not found in database
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                pw.write("{\"error\": \"User not found\"}");
+                //pw.write("{\"error\": \"User not found\"}");
             }
 
         } catch (SQLException e) {
             System.err.println("SQL Error: " + e.getMessage());
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            pw.println("{\"error\": \"Database error occurred\"}");
+            //pw.println("{\"error\": \"Database error occurred\"}");
         } catch (Exception e) {
             System.err.println("Unexpected Error: " + e.getMessage());
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            pw.println("{\"error\": \"Failed to update user profile\"}");
+            //pw.println("{\"error\": \"Failed to update user profile\"}");
         } finally {
             // Close resources
             try {

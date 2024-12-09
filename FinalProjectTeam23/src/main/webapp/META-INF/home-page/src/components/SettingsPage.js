@@ -5,7 +5,8 @@ import SettingsCircleButton from "./SettingsCircleButton";
 import SettingsProfileButton from "./SettingsProfileButton";
 import UserForm from './UpdateUserForm';
 import Goals from "./Goals";
-import LogoutButton from "./LogoutButton";
+import EditPfp from "./EditPfp";
+import Logout from "./Logout";
 import "./Settings.css";
 
 const SettingsPage = () => {
@@ -45,7 +46,7 @@ const SettingsPage = () => {
       <Goals />
 
       {/* Logout Button */}
-      <LogoutButton />
+      <Logout />
     </div>
   );
 };

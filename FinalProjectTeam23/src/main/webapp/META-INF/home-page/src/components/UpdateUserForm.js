@@ -3,10 +3,10 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const UpdateUserForm = () => {
   const [userData, setUserData] = useState({
-    name: '',
-	username: '',
-    email: '',
-    password: '',
+    name: 'Jane Doe',
+	username: 'jdoe',
+    email: 'Janedoe@gmail.com',
+    password: 'Password1',
     profilePicture: '', 
     newPassword: '', 
   });
@@ -30,7 +30,7 @@ const UpdateUserForm = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          alert(data.error);
+          //alert(data.error);
         } else {
           setUserData({
             name: data.name,
@@ -44,7 +44,7 @@ const UpdateUserForm = () => {
       })
       .catch((err) => {
 	  console.error('Request failed:', err);
-	  setErrorMessage('Failed to get user profile: ' + err.message);
+	  //setErrorMessage('Failed to get user profile: ' + err.message);
       });
   };
 
@@ -78,12 +78,12 @@ const UpdateUserForm = () => {
 	}
 	
     // If the newPassword field is filled, update it, otherwise, use the old password
-    const url = `http://localhost:8080/Workout-Web-Application/fitnessapp/UpdateUserProfile?userId=${userId}&password=${encodeURIComponent(newPassword || password)}&name=${encodeURIComponent(name)}`;
+    const url = `http://localhost:8080/Workout-Web-Application/UpdateUserProfile?userId=${userId}&password=${encodeURIComponent(newPassword || password)}&name=${encodeURIComponent(name)}`;
 
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP Error: ${response.status}`);
+          //throw new Error(`HTTP Error: ${response.status}`);
         }
         return response.json();
       })
@@ -152,7 +152,7 @@ const UpdateUserForm = () => {
         />
       </div>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <button className="save-btn" onClick={handleSave}>
+      <button className="save-btn" /*onClick={handleSave}*/>
         Save
       </button>
     </div>
