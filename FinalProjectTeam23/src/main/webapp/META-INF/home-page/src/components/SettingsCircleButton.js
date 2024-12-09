@@ -1,7 +1,7 @@
 import React from "react";
 import bellIcon from "../assets/bell.svg"; 
 
-const CircleButton = () => {
+const SettingsCircleButton = () => {
   return (
     <button
       style={{
@@ -32,5 +32,4 @@ const CircleButton = () => {
   );
 };
 
-export default CircleButton;
-
+export default SettingsCircleButton;

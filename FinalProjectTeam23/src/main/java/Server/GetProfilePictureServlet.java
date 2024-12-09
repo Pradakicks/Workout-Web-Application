@@ -49,7 +49,7 @@ public class GetProfilePictureServlet extends HttpServlet {
             pstmt.setInt(1, userId);
 
             if (rs.next()) {
-                byte[] profilePictureData = rs.getBytes("profile_picture");
+                byte[] profilePictureData = rs.getBytes("profile_image");
                 if (profilePictureData != null) {
                     response.setContentType("image/png");
                     response.setContentLength(profilePictureData.length);

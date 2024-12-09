@@ -26,15 +26,15 @@ public class GetGoalsServlet extends HttpServlet {
         response.setContentType("application/json");
         String clientIdParam = request.getParameter("clientId");
 
-        if (clientIdParam == null || clientIdParam.isEmpty()) {
+        if (userIdParam == null || userIdParam.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("{\"error\": \"clientId is required\"}");
             return;
         }
 
-        int clientId;
+        int userId;
         try {
-            clientId = Integer.parseInt(clientIdParam);
+            userId = Integer.parseInt(userIdParam);
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("{\"error\": \"Invalid clientId format\"}");

@@ -1,9 +1,6 @@
 package Server;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +9,11 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/update-streak")
 public class StreakServlet extends HttpServlet {
@@ -76,9 +78,13 @@ public class StreakServlet extends HttpServlet {
                 ResultSet rs = stmt.executeQuery(query);
 
                 if (rs.next()) {
+                	System.out.println("144 ");
                     currentStreak = rs.getInt("current_streak");
+                    System.out.println("55 ");
                     longestStreak = rs.getInt("longest_streak");
+                    System.out.println("66 ");
                     lastCheckin = rs.getTimestamp("last_checkin");
+                    System.out.println("177");
                 } else {
                     return createNewStreak(clientId);
                 }

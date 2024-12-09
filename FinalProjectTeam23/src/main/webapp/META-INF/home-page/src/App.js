@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from "react-router-dom";
 import logo from "./assets/logo.svg";
 import edit from "./assets/edit.svg";
 import settings from "./assets/settings.svg";
@@ -7,11 +7,14 @@ import ProfileCard from "./components/ProfileCard";
 import SearchBar from "./components/SearchBar";
 import CircleButton from "./components/CircleButton";
 import ProfileButton from "./components/ProfileButton";
+import SettingsPage from "./components/SettingsPage";
+import Dashboard from "./components/Dashboard";
 import "./App.css";
-
+import Login from "./Login";
 
 const App = () => {
   const logoHeight = 80;
+  const navigate = useNavigate();
 
   const [trainers, setTrainers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,13 +43,13 @@ const App = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "100%", // Full width container
-        overflowX: "hidden", // Prevent horizontal scrolling
-      }}>
-      {/* Logo Positioned at the Top-Left Corner */}
+        width: "100%",
+        overflowX: "hidden",
+      }}
+    >
       <div
         style={{
-          position: "relative", // Parent container for scrolling
+          position: "relative",
           width: "100%",
         }}>
         <img
@@ -61,17 +64,20 @@ const App = () => {
           }}
         />
 
-        {/* Profile and Settings Buttons */}
         <div
           style={{
             position: "absolute",
-            top: `calc(${logoHeight}px + 10px)`, // Relative to logo
-            left: "2%", // Aligned to the left with the logo
+            top: `calc(${logoHeight}px + 10px)`,
+            left: "2%",
             display: "flex",
             flexDirection: "column",
             gap: "10px",
-          }}>
-          <button className="profile-button">
+          }}
+        >
+          <button
+            className="profile-button"
+            onClick={() => navigate("/dashboard")}
+          >
             <img
               src={edit}
               alt="Edit Icon"
@@ -80,7 +86,10 @@ const App = () => {
             <span>Profile</span>
           </button>
 
-          <button className="settings-button">
+          <button
+            className="settings-button"
+            onClick={() => navigate("/SettingsPage")}
+          >
             <img
               src={settings}
               alt="Settings Icon"
@@ -91,32 +100,32 @@ const App = () => {
         </div>
       </div>
 
-      {/* Search Bar, Sort By Button, Circle Button, and Profile Button */}
       <div
         style={{
           position: "relative",
-          width: "100%", // Full width container
+          width: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center", // Center items
+          justifyContent: "center",
           paddingTop: "20px",
           gap: "20px",
-        }}>
-        {/* Sort By Button */}
+        }}
+      >
         <button
           className="sort-by-button"
           style={{
-            marginBottom: "10px", // Space below the button for the search bar
-          }}>
+            marginBottom: "10px",
+          }}
+        >
           <span style={{ fontSize: "1rem" }}>Sort By</span>
         </button>
 
-        {/* Search Bar */}
         <div
           style={{
             width: "80%",
-            maxWidth: "350px", // Optional max width
-          }}>
+            maxWidth: "350px",
+          }}
+        >
           <SearchBar />
         </div>
 
@@ -124,13 +133,12 @@ const App = () => {
         <ProfileButton />
       </div>
 
-      {/* Grid Container */}
       <div
         className="grid-container"
         style={{
           display: "grid",
           backgroundColor: "rgb(245, 245, 245)",
-          gridTemplateColumns: "repeat(2, 1fr)", // Limit to 2 items per row
+          gridTemplateColumns: "repeat(2, 1fr)",
           marginTop: "150px",
           gap: "20px", // Optional: Adds spacing between rows and columns
           width: "90%", // Responsive grid width
@@ -150,4 +158,12 @@ const App = () => {
 Each ProfileCard gets a key prop, which is necessary for React to keep track of 
 elements in the list efficiently. The trainer.trainerId is used as the unique key.*/
 
-export default App;
+const AppRoutes = () => (
+  <Routes>
+    <Route path="*" element={<App />} />
+    <Route path="/SettingsPage" element={<SettingsPage />} />
+    <Route path="/dashboard" element={<Dashboard />} />
+  </Routes>
+);
+
+export default AppRoutes;
