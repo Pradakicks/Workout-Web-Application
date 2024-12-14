@@ -1,9 +1,19 @@
 import React from "react";
 import "./ProfileCard.css"; // Import CSS for styling
-import profileImage from "../assets/example-trainer.png"; // Replace with your image path
+import profileImage from "../assets/profile-default-icon.png"; // Replace with your image path
 import dumbbellIcon from "../assets/dumbbell.svg";
+import { useNavigate } from "react-router-dom";
 
 const ProfileCard = ({ trainer }) => {
+	const navigate = useNavigate();
+	//console.log("Trainer data in ProfileCard:", trainer);
+
+
+	const handleSeeMoreClick = () => {
+	  //console.log("Navigating to:", `/trainer-profile/${trainer.trainerId}`);
+	  navigate(`/trainer-profile/${trainer.trainerId}`);
+	};
+
   return (
     <div className="profile-card">
       <div className="profile-image">
@@ -19,14 +29,15 @@ const ProfileCard = ({ trainer }) => {
         <h3>{trainer.trainerTitle}</h3> {/* Display trainer's title */}
         <h4>About</h4>
         <p>{trainer.services}</p> {/* Display trainer's services */}
-        <button className="see-more-button" style={{ marginLeft: 70 }}>
-          <img
-            src={dumbbellIcon}
-            alt="Dumbbell Icon"
-            style={{ width: 30, marginRight: 10 }} // Adjust marginRight as needed
-          />
-          <span style={{ marginLeft: 10, marginRight: 5 }}>See More!</span>
-        </button>
+		<button className="see-more-button" style={{ marginLeft: 70 }} onClick={handleSeeMoreClick}>
+		  <img
+		    src={dumbbellIcon}
+		    alt="Dumbbell Icon"
+		    style={{ width: 30, marginRight: 10 }}
+		  />
+		  <span style={{ marginLeft: 10, marginRight: 5 }}>See More!</span>
+		</button>
+
       </div>
     </div>
   );

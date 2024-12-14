@@ -10,10 +10,10 @@ const SettingsProfileButton = ({ profilePicture }) => {
     const userId = localStorage.getItem('userId');
     if (!userId) {
       alert('User not logged in.');
-      return;
+      return null;
     }
 
-    const url = `http://localhost:8080/Workout-Web-Application/GetProfilePicture?userId=${userId}`;
+    const url = `http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/GetProfilePicture?userId=${userId}`;
     
     fetch(url)
       .then((response) => {

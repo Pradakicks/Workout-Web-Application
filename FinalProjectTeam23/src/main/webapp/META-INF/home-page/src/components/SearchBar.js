@@ -28,7 +28,7 @@ const SearchBar = ({onSearch}) => {
       <input
         type="text"
         placeholder="Search..."
-        onChange = {onSearch}
+		onChange={onSearch}
         style={{
           flex: "1", // Take the remaining width
           border: "none", // Remove input border

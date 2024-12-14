@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const UpdateUserForm = () => {
-  const [userData, setUserData] = useState({
+  /*
+	const [userData, setUserData] = useState({
     name: 'Jane Doe',
 	username: 'jdoe',
     email: 'Janedoe@gmail.com',
@@ -10,7 +11,17 @@ const UpdateUserForm = () => {
     profilePicture: '', 
     newPassword: '', 
   });
+*/
 
+const [userData, setUserData] = useState({
+    name: '',
+	username: '',
+    email: '',
+    password: '',
+    profilePicture: '', 
+    newPassword: '', 
+  });
+  
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
@@ -18,14 +29,14 @@ const UpdateUserForm = () => {
   }, []);
 
   const fetchUserProfile = () => {
-    localStorage.setItem('userId', '1');
-    let userId = localStorage.getItem('userId');
+   // localStorage.setItem('userId', '1');
+   let userId = localStorage.getItem('userId');
     if (!userId) {
       alert('User not logged in.');
       return;
     }
 
-    const url = `http://localhost:8080/Workout-Web-Application/GetUserProfile?userId=${userId}`;
+    const url = `http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/GetUserProfile?userId=${userId}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {

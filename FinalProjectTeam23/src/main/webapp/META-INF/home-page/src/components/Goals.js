@@ -9,14 +9,13 @@ const Goals = () => {
   }, []);
 
   const fetchGoals = () => {
-	localStorage.setItem('userId','1');
     const userId = localStorage.getItem('userId');
     if (!userId) {
       alert('User not logged in.');
       return;
     }
 
-    const url = `http://localhost:8080/Workout-Web-Application/fetchGoals?userId=${userId}`;
+    const url = `http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/fetchGoals?userId=${userId}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -49,7 +48,7 @@ const Goals = () => {
       return;
     }
 
-    const url = `http://localhost:8080/Workout-Web-Application/AddGoal?userId=${userId}&goal=${goalInput.trim()}`;
+    const url = `http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/AddGoal?userId=${userId}&goal=${goalInput.trim()}`;
 
     fetch(url, { method: 'GET' })
       .then((response) => response.json())
@@ -76,7 +75,7 @@ const Goals = () => {
       return;
     }
 
-    const url = `http://localhost:8080/Workout-Web-Application/RemoveGoal?userId=${userId}&goal=${goal}`;
+    const url = `http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/RemoveGoal?userId=${userId}&goal=${goal}`;
 
     fetch(url, { method: 'GET' })
       .then((response) => response.json())

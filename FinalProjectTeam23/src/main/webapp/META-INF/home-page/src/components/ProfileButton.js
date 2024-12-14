@@ -1,10 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
-import profileIcon from "../assets/example-trainer.png"; // Replace with the path to your image
+import profileIcon from "../assets/profile-default-icon.png"; // Replace with the path to your image
 
 const ProfileButton = ({ width = "40px", height = "40px" }) => {
   const navigate = useNavigate(); // Initialize navigate function
 
+  const userId = localStorage.getItem('userId');
+   if (!userId) {
+     // If no user is logged in, don't show the profile button at all.
+     return null;
+   }
+   
   const handleProfileClick = () => {
     navigate("/dashboard"); // Navigate to dashboard when clicked
   };

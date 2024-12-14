@@ -16,7 +16,7 @@ const StreakCard = () => {
       return;
     }
 
-    const url = `http://localhost:8080/Workout-Web-Application/update-streak?clientId=${clientId}`;
+    const url = `http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/update-streak?clientId=${clientId}`;
 
     fetch(url)
       .then((response) => {

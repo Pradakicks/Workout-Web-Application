@@ -19,10 +19,10 @@ const EditPfp = () => {
     const userId = localStorage.getItem('userId');
     if (!userId) {
       alert('User not logged in.');
-      return;
+      return null;
     }
     
-	const profilePictureUrl = `http://localhost:8080/Workout-Web-Application/GetProfilePicture?userId=${userId}`;
+	const profilePictureUrl = `http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/GetProfilePicture?userId=${userId}`;
     // Fetch user profile information
     fetch(profilePictureUrl)
       .then((response) => response.json())

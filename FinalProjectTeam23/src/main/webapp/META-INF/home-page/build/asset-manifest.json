@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a01d8f98.css",
+    "main.js": "/static/js/main.b0dc2fe8.js",
+    "static/js/453.6a0d684f.chunk.js": "/static/js/453.6a0d684f.chunk.js",
+    "static/media/profile-default-icon.png": "/static/media/profile-default-icon.33bb5b7d7228939c7cba.png",
+    "static/media/example-trainer.png": "/static/media/example-trainer.e7686175f3454c974ea1.png",
+    "static/media/no-pfp.webp": "/static/media/no-pfp.5f86e659ff8bb24f1d6c.webp",
+    "static/media/plate.svg": "/static/media/plate.b233905057ed20552daa4de96a89287b.svg",
+    "static/media/shoe.svg": "/static/media/shoe.af89711deb295c15363331165ca7bb2c.svg",
+    "static/media/settings.svg": "/static/media/settings.81fdca30f8c5ae3b698b8b174c2c1606.svg",
+    "static/media/scale.svg": "/static/media/scale.1572713c3f9844df36bbf4b7496499b0.svg",
+    "static/media/logo.svg": "/static/media/logo.53b948520bcaffeb08b92241b97f6846.svg",
+    "static/media/water.svg": "/static/media/water.7865bd6f53d8435db85d16e82b71732f.svg",
+    "static/media/search.svg": "/static/media/search.ad28312634dd395082006c6bc98b0093.svg",
+    "static/media/dumbbell-bench-press.svg": "/static/media/dumbbell-bench-press.442608e675ecd77eef2118ff66e7aada.svg",
+    "static/media/bicep-curls.svg": "/static/media/bicep-curls.51dc365abe51bd3689463cf2bb1e0822.svg",
+    "static/media/bell.svg": "/static/media/bell.f87c650d3e3484f82c6720614616c73d.svg",
+    "static/media/dumbbell.svg": "/static/media/dumbbell.57db9fa7371ae5fe68dc475c393bae3e.svg",
+    "static/media/pushups.svg": "/static/media/pushups.fb033b63b7aa7d86a49eb8654929fa46.svg",
+    "static/media/editGray.svg": "/static/media/editGray.ded2f3044da9ff8861e7524c28a95c8f.svg",
+    "static/media/edit.svg": "/static/media/edit.a629979dcc646b3cdd3745cdb945fae3.svg",
+    "static/media/tricep-dips.svg": "/static/media/tricep-dips.20f9df6aca1423d578c8d97c19f43c52.svg",
+    "index.html": "/index.html",
+    "static/media/home.svg": "/static/media/home.fa2d394b4fb0ca8c988d8f432188530a.svg",
+    "static/media/offline.svg": "/static/media/offline.21ab4fb8e95791c1079dda0260f99506.svg",
+    "static/media/online.svg": "/static/media/online.4f59bed9e25071dc033b699b38863dc9.svg",
+    "main.a01d8f98.css.map": "/static/css/main.a01d8f98.css.map",
+    "main.b0dc2fe8.js.map": "/static/js/main.b0dc2fe8.js.map",
+    "453.6a0d684f.chunk.js.map": "/static/js/453.6a0d684f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a01d8f98.css",
+    "static/js/main.b0dc2fe8.js"
+  ]
+}

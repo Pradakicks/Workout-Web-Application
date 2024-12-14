@@ -11,6 +11,35 @@ const Login = () => {
   // State variable for error messages
   const [error, setError] = useState('');
 
+  const handleSubmit = (e) => {
+      e.preventDefault(); // Prevent form from reloading the page
+
+      fetch('http://localhost:8080/Workout-Web-Application-1.0-SNAPSHOT/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded', // backend expects form data
+        },
+        body: new URLSearchParams({
+          username: username,
+          password: password,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 'success') {
+            // Store userId in localStorage
+            localStorage.setItem('userId', data.userId);
+			localStorage.setItem('role', data.role);
+            window.location.href = '/'; // Redirect to homepage or wherever after successful login
+          } else {
+            setError(data.message || 'Invalid username or password');
+          }
+        })
+        .catch((err) => {
+          console.error('Login error:', err);
+          setError('An error occurred while logging in.');
+        });
+    };
   // Function to handle form submission
 //   const handleSubmit = (e) => {
 //     e.preventDefault(); // Prevent default form submission behavior
@@ -37,7 +66,7 @@ const Login = () => {
       <h2>Login</h2>
       {error && <p className="error">{error}</p>} {/* Display error message */}
       {/* <form onSubmit={handleSubmit}> */}
-	  <form>
+	  <form onSubmit={handleSubmit}>
         <div>
           <label>Username</label>
           <input
@@ -67,6 +96,7 @@ const Login = () => {
 				width: "30%",
 				fontSize: "14px"
 			}}
+			onClick={() => { window.location.href = '/register'; }} // Navigate to a register page
 		>Create one here</button>
     </div>
   );
